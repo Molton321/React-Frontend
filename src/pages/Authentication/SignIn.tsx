@@ -83,7 +83,6 @@ const SignIn: React.FC = () => {
         opacity: 1,
       }}
     >
-      <div className="absolute inset-0 bg-black opacity-30"></div>
       <div className="flex flex-col items-center justify-center space-y-10">
         <h1
           className="relative text-white text-4xl md:text-6xl font-normal text-center px-3"
