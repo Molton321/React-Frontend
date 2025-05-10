@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import GoogleButton from '../../components/GoogleButton';
 import GreenButton from '../../components/GreenButton';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp: React.FC = () => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
@@ -18,6 +19,12 @@ const SignUp: React.FC = () => {
 
   const handleGoogleSignIn = () => {
     console.log('Google Sign-In triggered');
+  };
+
+  const navigate = useNavigate();
+
+  const handleSignInRedirect = () => {
+    navigate('/auth/signin');
   };
 
   return isDesktop ? (
@@ -58,7 +65,7 @@ const SignUp: React.FC = () => {
             <div className="flex flex-col items-center space-y-2">
               <GoogleButton onClick={handleGoogleSignIn}></GoogleButton>
               <GreenButton
-                onClick={handleGoogleSignIn}
+                onClick={handleSignInRedirect}
                 text={'Ya tengo una cuenta'}
               ></GreenButton>
             </div>
