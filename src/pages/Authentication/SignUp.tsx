@@ -63,7 +63,10 @@ const SignUp: React.FC = () => {
               <span className="emphasis">continuar</span>
             </h5>
             <div className="flex flex-col items-center space-y-2">
-              <GoogleButton onClick={handleGoogleSignIn}></GoogleButton>
+              <GoogleButton
+                onClick={handleGoogleSignIn}
+                text="Registrate Ya"
+              ></GoogleButton>
               <GreenButton
                 onClick={handleSignInRedirect}
                 text={'Ya tengo una cuenta'}
@@ -108,7 +111,10 @@ const SignUp: React.FC = () => {
               <span className="emphasis">continuar</span>
             </h5>
             <div className="flex flex-col items-center space-y-4">
-              <GoogleButton onClick={handleGoogleSignIn}></GoogleButton>
+              <GoogleButton
+                onClick={handleGoogleSignIn}
+                text="Registrate Ya"
+              ></GoogleButton>
               <GreenButton
                 onClick={handleGoogleSignIn}
                 text={'Ya tengo una cuenta'}

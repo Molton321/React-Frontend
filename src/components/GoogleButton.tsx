@@ -1,13 +1,16 @@
+import { TextCursor } from 'lucide-react';
 import React from 'react';
 
 interface GoogleButtonProps {
   onClick: () => void;
   width?: string; // Nueva prop para definir el ancho del botón
+  text: string;
 }
 
 const GoogleButton: React.FC<GoogleButtonProps> = ({
   onClick,
   width = 'auto',
+  text,
 }) => {
   return (
     <button
@@ -45,7 +48,7 @@ const GoogleButton: React.FC<GoogleButtonProps> = ({
           style={{ width: '20px', height: '20px' }}
         />
       </div>
-      Regístrate Ya
+      {text}
     </button>
   );
 };
