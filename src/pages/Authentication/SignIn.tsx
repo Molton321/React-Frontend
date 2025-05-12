@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import GoogleButton from '../../components/GoogleButton';
-import GreenButton from '../../components/GreenButton';
-import { useNavigate } from 'react-router-dom';
 import FlipableSignCard from '../../components/Auth/Card/FlipableSignCard';
 
 const SignIn: React.FC = () => {
@@ -22,10 +19,8 @@ const SignIn: React.FC = () => {
     console.log('Google Sign-In triggered');
   };
 
-  const navigate = useNavigate();
-
-  const handleSignUpRedirect = () => {
-    navigate('/auth/signup');
+  const handleGoogleSignUp = () => {
+    console.log('Google Sign-Up triggered');
   };
 
   return isDesktop ? (
@@ -36,7 +31,10 @@ const SignIn: React.FC = () => {
           background: 'linear-gradient(to right, #31CA58, #19612C)',
         }}
       >
-        <FlipableSignCard></FlipableSignCard>
+        <FlipableSignCard
+          handleGoogleSignIn={handleGoogleSignIn}
+          handleGoogleSignUp={handleGoogleSignUp}
+        ></FlipableSignCard>
       </div>
       <div
         className="hidden md:flex w-1/2 items-center justify-center relative"
@@ -75,34 +73,10 @@ const SignIn: React.FC = () => {
           Tu comida favorita está a un clic. ¡Inicia sesión y deja que te la
           llevemos!
         </h1>
-        <div
-          className="w-4/5 max-w-lg p-4 sm:p-10 bg-white rounded-lg shadow-sm md:p-8 dark:bg-gray-800 dark:border-gray-700"
-          id="card"
-        >
-          <form className="space-y-10" action="#">
-            <h5 className="mt-5 text-xl md:text-3xl font-medium text-gray-900 dark:text-white text-center">
-              Regístrate o Inicia sesión para{' '}
-              <span className="emphasis">continuar</span>
-            </h5>
-            <div className="flex flex-col items-center space-y-4">
-              <GoogleButton
-                onClick={handleGoogleSignIn}
-                text="Registrate Ya"
-              ></GoogleButton>
-              <GreenButton
-                onClick={handleGoogleSignIn}
-                text={'Ya tengo una cuenta'}
-              ></GreenButton>
-            </div>
-            <div className="flex items-start">
-              <label className="ms-2 text-xs md:text-lg text-center font-medium text-gray-900 dark:text-gray-300 mb-10">
-                Al registrarte con nosotros aceptas los{' '}
-                <span className="emphasis">Términos del Servicio</span> y las{' '}
-                <span className="emphasis">Políticas de Privacidad</span>
-              </label>
-            </div>
-          </form>
-        </div>
+        <FlipableSignCard
+          handleGoogleSignIn={handleGoogleSignIn}
+          handleGoogleSignUp={handleGoogleSignUp}
+        ></FlipableSignCard>
       </div>
     </div>
   );

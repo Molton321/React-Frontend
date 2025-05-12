@@ -11,7 +11,7 @@ const GreenButton: React.FC<GreenButtonProps> = ({
   width = 'auto',
 }) => {
   return (
-    <button
+    <div
       onClick={onClick}
       style={{
         width: width,
@@ -31,7 +31,7 @@ const GreenButton: React.FC<GreenButtonProps> = ({
       }}
     >
       {text}
-    </button>
+    </div>
   );
 };
 
