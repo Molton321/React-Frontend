@@ -14,6 +14,7 @@ const Buttons = lazy(() => import('../pages/UiElements/Buttons'));
 const ListUsers = lazy(() => import('../pages/Users/page'));
 const CreatetUser = lazy(() => import('../pages/Users/create'));
 const UpdatetUser = lazy(() => import('../pages/Users/update'));
+const TestComponent = lazy(() => import('../components/TestComponent'));
 
 const coreRoutes = [
   {
@@ -75,8 +76,12 @@ const coreRoutes = [
     path: '/users/update/:id',
     title: 'Update User',
     component: UpdatetUser,
-  }
-  
+  },
+  {
+    path: '/test',
+    title: 'Test',
+    component: TestComponent,
+  }  
 ];
 
 const routes = [...coreRoutes];
