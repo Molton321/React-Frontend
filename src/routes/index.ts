@@ -81,7 +81,7 @@ const coreRoutes = [
     path: '/test',
     title: 'Test',
     component: TestComponent,
-  }  
+  },
 ];
 
 const routes = [...coreRoutes];

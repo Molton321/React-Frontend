@@ -10,7 +10,7 @@
 
 @layer components {
   .emphasis {
-    color: #35c75a;
+    color: #ff3333;
     a {
       color: var(--color-blue-500);
       &:hover {

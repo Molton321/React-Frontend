@@ -18,8 +18,8 @@ const GoogleButton: React.FC<GoogleButtonProps> = ({
         justifyContent: 'center',
         padding: '10px 20px',
         backgroundColor: 'transparent', // Fondo transparente
-        color: '#31CA58', // Texto verde
-        border: '2px solid #31CA58', // Borde verde
+        color: '#FF3333', // Texto rojo
+        border: '2px solid #FF3333', // Borde rojo
         borderRadius: '10px',
         cursor: 'pointer',
         fontSize: '16px',

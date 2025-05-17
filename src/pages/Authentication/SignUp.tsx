@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GoogleButton from '../../components/GoogleButton';
-import GreenButton from '../../components/GreenButton';
+import MainButton from '../../components/MainButton';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp: React.FC = () => {
@@ -17,8 +17,8 @@ const SignUp: React.FC = () => {
     };
   }, []);
 
-  const handleGoogleSignIn = () => {
-    console.log('Google Sign-In triggered');
+  const handleGoogleSignUp = async () => {
+    navigate('/auth/google');
   };
 
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ const SignUp: React.FC = () => {
       <div
         className="flex w-full h-full md:w-1/2 items-center justify-center sm:bg-white"
         style={{
-          background: 'linear-gradient(to right, #31CA58, #19612C)',
+          background: 'linear-gradient(to right, #FF3333, #631717)',
         }}
       >
         <div
@@ -63,11 +63,11 @@ const SignUp: React.FC = () => {
               <span className="emphasis">continuar</span>
             </h5>
             <div className="flex flex-col items-center space-y-2">
-              <GoogleButton onClick={handleGoogleSignIn}></GoogleButton>
-              <GreenButton
+              <GoogleButton onClick={handleGoogleSignUp}></GoogleButton>
+              <MainButton
                 onClick={handleSignInRedirect}
                 text={'Ya tengo una cuenta'}
-              ></GreenButton>
+              ></MainButton>
             </div>
             <div className="flex items-start">
               <label className="ms-2 text-sm md:text-xl text-center font-medium text-gray-900 dark:text-gray-300 mb-20">
@@ -108,11 +108,11 @@ const SignUp: React.FC = () => {
               <span className="emphasis">continuar</span>
             </h5>
             <div className="flex flex-col items-center space-y-4">
-              <GoogleButton onClick={handleGoogleSignIn}></GoogleButton>
-              <GreenButton
-                onClick={handleGoogleSignIn}
+              <GoogleButton onClick={handleGoogleSignUp}></GoogleButton>
+              <MainButton
+                onClick={handleSignInRedirect}
                 text={'Ya tengo una cuenta'}
-              ></GreenButton>
+              ></MainButton>
             </div>
             <div className="flex items-start">
               <label className="ms-2 text-xs md:text-lg text-center font-medium text-gray-900 dark:text-gray-300 mb-10">

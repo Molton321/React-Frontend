@@ -15,7 +15,7 @@ const GreenButton: React.FC<GreenButtonProps> = ({
       onClick={onClick}
       style={{
         width: width,
-        backgroundColor: '#31CA58',
+        backgroundColor: '#FF3333',
         color: 'white',
         border: 'none',
         padding: '15px 20px',
@@ -24,10 +24,10 @@ const GreenButton: React.FC<GreenButtonProps> = ({
         transition: 'background-color 0.3s ease',
       }}
       onMouseEnter={(e) => {
-        (e.target as HTMLButtonElement).style.backgroundColor = '#28A745';
+        (e.target as HTMLButtonElement).style.backgroundColor = '#631717';
       }}
       onMouseLeave={(e) => {
-        (e.target as HTMLButtonElement).style.backgroundColor = '#31CA58';
+        (e.target as HTMLButtonElement).style.backgroundColor = '#FF3333';
       }}
     >
       {text}

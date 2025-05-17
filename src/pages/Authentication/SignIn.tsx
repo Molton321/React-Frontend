@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GoogleButton from '../../components/GoogleButton';
-import GreenButton from '../../components/GreenButton';
+import MainButton from '../../components/MainButton';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn: React.FC = () => {
@@ -32,7 +32,7 @@ const SignIn: React.FC = () => {
       <div
         className="flex w-full h-full md:w-1/2 items-center justify-center sm:bg-white"
         style={{
-          background: 'linear-gradient(to right, #31CA58, #19612C)',
+          background: 'linear-gradient(to right, #FF3333, #631717)',
         }}
       >
         <div
@@ -46,10 +46,10 @@ const SignIn: React.FC = () => {
             </h5>
             <div className="flex flex-col items-center space-y-2">
               <GoogleButton onClick={handleGoogleSignIn}></GoogleButton>
-              <GreenButton
+              <MainButton
                 onClick={handleSignUpRedirect}
                 text={'No tengo una cuenta'}
-              ></GreenButton>
+              ></MainButton>
             </div>
             <div className="flex items-start">
               <label className="ms-2 text-sm md:text-xl text-center font-medium text-gray-900 dark:text-gray-300 mb-20">
@@ -109,10 +109,10 @@ const SignIn: React.FC = () => {
             </h5>
             <div className="flex flex-col items-center space-y-4">
               <GoogleButton onClick={handleGoogleSignIn}></GoogleButton>
-              <GreenButton
+              <MainButton
                 onClick={handleGoogleSignIn}
                 text={'Ya tengo una cuenta'}
-              ></GreenButton>
+              ></MainButton>
             </div>
             <div className="flex items-start">
               <label className="ms-2 text-xs md:text-lg text-center font-medium text-gray-900 dark:text-gray-300 mb-10">
