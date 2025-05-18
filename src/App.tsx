@@ -16,30 +16,20 @@ const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
+  let googleUser: any;
 
   useEffect(() => {
     loadUser();
+    getUser();
     setTimeout(() => setLoading(false), 1000);
   }, []);
 
-  const loadUser = async () => {
-    let user = localStorage.getItem('user');
+  const loadUser = async () => {};
 
-    if (!user) {
-      try {
-        const googleUser = await account.get().then((res) => console.log(res));
+  const getUser = async () => {
+    googleUser = await account.get();
 
-        /* const saveUser = {
-          id: googleUser.$id,
-          name: googleUser.name,
-          email: googleUser.email,
-        };
-        localStorage.setItem('user', JSON.stringify(saveUser));
-        */
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    localStorage.setItem('user', JSON.stringify(googleUser));
   };
 
   return loading ? (
