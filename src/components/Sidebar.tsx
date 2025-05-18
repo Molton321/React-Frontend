@@ -112,13 +112,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     <li>
                       <NavLink
                         to="/productos"
-                        className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343]
+                        className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343] dark:text-white
  duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('productos') && 'bg-bodydark1 dark:bg-meta-4'
                           }`}
                       >
                         <span>Productos</span>
                         <svg
-                          className="ml-auto w-4 h-4 text-gray-400  dark:text-gray-400 dark:group-hover:text-white"
+                          className="ml-auto w-4 h-4 text-gray-400  dark:text-gray-400  dark:group-hover:text-white"
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="2"
@@ -135,8 +135,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     <li>
                       <NavLink
                         to="/profile"
-                        className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343]
- duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-bodydark1 ${pathname.includes('profile') && 'bg-bodydark1 dark:bg-bodydark1'
+                        className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343] dark:text-white
+ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('profile') && 'bg-bodydark1 dark:bg-meta-4'
                           }`}
                       >
                         <span>Restaurantes</span>
@@ -162,14 +162,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     <li>
                       <NavLink
                         to="/deliveryMap"
-                        className={`group relative flex items-center rounded-sm py-2 px-4 font-bold  text-[#353343]
-duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-bodydark1 ${pathname.includes('deliveryMap') &&
-                          'bg-bodydark1 dark:bg-bodydark1'
+                        className={`group relative flex items-center rounded-sm py-2 px-4 font-bold  text-[#353343] dark:text-white
+duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('deliveryMap') &&
+                          'dark:bg-meta-4 dark:hover:bg-meta-4'
                           }`}
                       >
                         <span>¿Dónde va mi pedido?</span>
                         <svg
-                          className="ml-auto w-4 h-4 text-gray-400  dark:bg-bodydark1 dark:group-hover:text-white"
+                          className="ml-auto w-4 h-4 text-gray-400  dark:group-hover:text-white"
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="2"
@@ -189,8 +189,8 @@ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-bodydark1 ${pathname.i
                     <li>
                       <NavLink
                         to="/tables"
-                        className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343]
-duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-bodydark1 ${pathname.includes('tables') &&
+                        className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343] dark:text-white
+duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('tables') &&
                           'bg-bodydark1 dark:bg-bodydark1'
                           }`}
                       >
@@ -232,7 +232,7 @@ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-bodydark1 ${pathname.i
                           <React.Fragment>
                             <NavLink
                               to="#"
-                              className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-bold text-[#353343] duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${(pathname === '/auth' ||
+                              className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-bold text-[#353343] duration-300 ease-in-out dark:text-white hover:bg-bodydark1 dark:hover:bg-meta-4 ${(pathname === '/auth' ||
                                   pathname.includes('auth')) &&
                                 'bg-graydark dark:bg-meta-4'
                                 }`}
@@ -244,7 +244,7 @@ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-bodydark1 ${pathname.i
                               }}
                             >
                               <svg
-                                className="fill-current"
+                                className="fill-current dark:text-white"
                                 width="18"
                                 height="19"
                                 viewBox="0 0 18 19"
@@ -300,24 +300,14 @@ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-bodydark1 ${pathname.i
                                   <NavLink
                                     to="/auth/signin"
                                     className={({ isActive }) =>
-                                      'group relative flex items-center gap-2.5 rounded-md px-4 font-bold text-[#353343] duration-300 ease-in-out hover:bg-bodydark1 ' +
+                                      'group relative flex items-center gap-2.5 rounded-md px-4 font-bold text-[#353343] duration-300 ease-in-out dark:text-white hover:bg-bodydark1 ' +
                                       (isActive && '!text-white')
                                     }
                                   >
                                     Sign In
                                   </NavLink>
                                 </li>
-                                <li>
-                                  <NavLink
-                                    to="/auth/signup"
-                                    className={({ isActive }) =>
-                                      'group relative flex items-center gap-2.5 rounded-md px-4 font-bold text-[#353343] duration-300 ease-in-out hover:bg-bodydark1' +
-                                      (isActive && '!text-white')
-                                    }
-                                  >
-                                    Sign Up
-                                  </NavLink>
-                                </li>
+                                
                               </ul>
                             </div>
                             {/* <!-- Dropdown Menu End --> */}
@@ -325,12 +315,12 @@ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-bodydark1 ${pathname.i
                             <li>
                               <NavLink
                                 to="/settings"
-                                className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-bold text-[#353343] duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('settings') &&
+                                className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-bold text-[#353343] duration-300 ease-in-out dark:text-white hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('settings') &&
                                   'bg-bodydark1 dark:bg-meta-4'
                                   }`}
                               >
                                 <svg
-                                  className="fill-current"
+                                  className="fill-current dark:text-white"
                                   width="18"
                                   height="19"
                                   viewBox="0 0 18 19"
