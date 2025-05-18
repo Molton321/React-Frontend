@@ -6,7 +6,11 @@ import ChartOne from '../../components/ChartOne.tsx';
 import ChartThree from '../../components/ChartThree.tsx';
 import ChartTwo from '../../components/ChartTwo.tsx';
 import ChatCard from '../../components/ChatCard.tsx';
+<<<<<<< HEAD
 import MapOne from '../../components/MapOne.tsx';
+=======
+//import MapOne from '../../components/MapOne.tsx';
+>>>>>>> notificationSound
 import TableOne from '../../components/TableOne.tsx';
 
 const ECommerce = () => {
@@ -23,7 +27,10 @@ const ECommerce = () => {
         <ChartOne />
         <ChartTwo />
         <ChartThree />
+<<<<<<< HEAD
         <MapOne />
+=======
+>>>>>>> notificationSound
         <div className="col-span-12 xl:col-span-8">
           <TableOne />
         </div>

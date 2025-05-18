@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 
 import UserOne from '../images/user/user-01.png';
@@ -11,6 +12,28 @@ const DropdownUser = () => {
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
+=======
+import { Link, useNavigate } from 'react-router-dom';
+
+import UserOne from '../images/user/user-01.png';
+import { useSelector } from 'react-redux';
+import { RootState } from '../stores/store';
+import securityService from '../services/securityService';
+
+const DropdownUser = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const user = useSelector((state: RootState) => state.user.user);
+  const trigger = useRef<any>(null);
+  const dropdown = useRef<any>(null);
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    securityService.logout();
+    console.log('Logout');
+    
+    navigate('/auth/signIn');
+  };
+>>>>>>> notificationSound
 
   // close on click outside
   useEffect(() => {
@@ -38,6 +61,7 @@ const DropdownUser = () => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
+<<<<<<< HEAD
   // logout
   const handleLogout = () => {
     console.log('Logout');
@@ -46,6 +70,8 @@ const DropdownUser = () => {
     window.location.href = '/auth/signin';
   };
 
+=======
+>>>>>>> notificationSound
   return (
     <div className="relative">
       <Link
@@ -56,7 +82,11 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
+<<<<<<< HEAD
             <h2>Bienvenido, {user?.name || 'Invitado'}</h2>
+=======
+            {user?.name}
+>>>>>>> notificationSound
           </span>
           <span className="block text-xs">UX Designer</span>
         </span>
@@ -167,8 +197,13 @@ const DropdownUser = () => {
           </li>
         </ul>
         <button
+<<<<<<< HEAD
           className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
           onClick={handleLogout}
+=======
+          onClick={logOut}
+          className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+>>>>>>> notificationSound
         >
           <svg
             className="fill-current"

@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 import { User } from "../models/user";
 import { store } from "../store/store";
 import { setUser } from "../store/userSlice";
 
 class SecurityService extends EventTarget {
+=======
+import { User } from "../models/User";
+import { store } from "../stores/store";
+import { setUser } from "../stores/UserSlice";
+
+class SecurityService extends EventTarget {  //
+>>>>>>> notificationSound
     keySession: string;
     API_URL: string;
     user: User;
@@ -37,8 +45,13 @@ class SecurityService extends EventTarget {
             }
 
             const data = await response.json();
+<<<<<<< HEAD
             localStorage.setItem("user", JSON.stringify(data));
             store.dispatch(setUser(data));
+=======
+            //localStorage.setItem("user", JSON.stringify(data));
+            store.dispatch(setUser(data)); //ESTO SE UTILIZA PARA MANEJAR VARIABLES DE GLOBALES
+>>>>>>> notificationSound
             return data;
         } catch (error) {
             console.error('Error during login:', error);
@@ -63,4 +76,8 @@ class SecurityService extends EventTarget {
     }
 }
 
+<<<<<<< HEAD
 export default new SecurityService();
+=======
+export default new SecurityService();
+>>>>>>> notificationSound

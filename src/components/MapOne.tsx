@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import jsVectorMap from 'jsvectormap';
+=======
+/* import jsVectorMap from 'jsvectormap';
+>>>>>>> notificationSound
 import 'jsvectormap/dist/css/jsvectormap.css';
 import { useEffect } from 'react';
 import '../js/us-aea-en';
@@ -51,3 +55,7 @@ const MapOne = () => {
 };
 
 export default MapOne;
+<<<<<<< HEAD
+=======
+ */
+>>>>>>> notificationSound

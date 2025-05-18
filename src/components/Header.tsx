@@ -1,18 +1,41 @@
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
+=======
+import { Link, useNavigate } from 'react-router-dom';
+>>>>>>> notificationSound
 import Logo from '../images/logo/logo-icon.svg';
 import DarkModeSwitcher from './DarkModeSwitcher';
 import DropdownMessage from './DropdownMessage';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
+<<<<<<< HEAD
+=======
+import Navbar from './NavBar';
+>>>>>>> notificationSound
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
+<<<<<<< HEAD
 }) => {
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11">
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
+=======
+  
+}
+) => {
+  const navigate = useNavigate();
+  const storedUser = localStorage.getItem("user");
+  const handleLogin = () => {
+    navigate('/auth/signIn');
+  }
+  return (
+    <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
+      <div className="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11">
+        <div className="flex items-center gap-2 sm:gap-4 ">
+>>>>>>> notificationSound
           {/* <!-- Hamburger Toggle BTN --> */}
           <button
             aria-controls="sidebar"
@@ -20,7 +43,11 @@ const Header = (props: {
               e.stopPropagation();
               props.setSidebarOpen(!props.sidebarOpen);
             }}
+<<<<<<< HEAD
             className="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
+=======
+            className="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark"
+>>>>>>> notificationSound
           >
             <span className="relative block h-5.5 w-5.5 cursor-pointer">
               <span className="du-block absolute right-0 h-full w-full">
@@ -56,7 +83,11 @@ const Header = (props: {
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
 
+<<<<<<< HEAD
           <Link className="block flex-shrink-0 lg:hidden" to="/">
+=======
+          <Link className="block flex-shrink-0" to="/">
+>>>>>>> notificationSound
             <img src={Logo} alt="Logo" />
           </Link>
         </div>
@@ -100,16 +131,34 @@ const Header = (props: {
         <div className="flex items-center gap-3 2xsm:gap-7">
           <ul className="flex items-center gap-2 2xsm:gap-4">
             {/* <!-- Dark Mode Toggler --> */}
+<<<<<<< HEAD
             <DarkModeSwitcher />
+=======
+            <DarkModeSwitcher /> 
+
+            
+>>>>>>> notificationSound
             {/* <!-- Dark Mode Toggler --> */}
 
             {/* <!-- Notification Menu Area --> */}
             <DropdownNotification />
             {/* <!-- Notification Menu Area --> */}
+<<<<<<< HEAD
 
             {/* <!-- Chat Notification Area --> */}
             <DropdownMessage />
             {/* <!-- Chat Notification Area --> */}
+=======
+            <Navbar/>
+            {/* <!-- Chat Notification Area --> */}
+            <DropdownMessage />
+            {/* <!-- Chat Notification Area --> */}
+            {!storedUser && (
+              <button onClick={handleLogin}>
+                SignUp
+              </button>
+            )}
+>>>>>>> notificationSound
           </ul>
 
           {/* <!-- User Area --> */}

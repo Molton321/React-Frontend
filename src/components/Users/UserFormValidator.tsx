@@ -1,14 +1,26 @@
+<<<<<<< HEAD
 import { User } from "../../models/user";
+=======
+import { User } from "../../models/User";
+>>>>>>> notificationSound
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 
 // Definimos la interfaz para los props
+<<<<<<< HEAD
 interface MyFormProps {
     mode: number; // Puede ser 1 (crear) o 2 (actualizar)
     handleCreate?: (values: User) => void;
     handleUpdate?: (values: User) => void;
     user?: User | null;
+=======
+interface MyFormProps { //Es como el contructor de la clase
+    mode: number; // Puede ser 1 (crear) o 2 (actualizar)
+    handleCreate?: (values: User) => void; //Permite inyectar una funcion, (funcion lambda)
+    handleUpdate?: (values: User) => void;
+    user?: User | null; //null para crear, User para actualizar
+>>>>>>> notificationSound
 }
 
 
@@ -24,7 +36,11 @@ const UserFormValidator: React.FC<MyFormProps> = ({ mode, handleCreate, handleUp
             console.error('No function provided for the current mode');
         }
     };
+<<<<<<< HEAD
 
+=======
+    //Formik permite que se valide mediante se vaya escribiendo, y no hasta que se envie el formulario
+>>>>>>> notificationSound
     return (
         <Formik
             initialValues={user ? user :{
@@ -110,4 +126,8 @@ const UserFormValidator: React.FC<MyFormProps> = ({ mode, handleCreate, handleUp
     );
 };
 
+<<<<<<< HEAD
 export default UserFormValidator;
+=======
+export default UserFormValidator;
+>>>>>>> notificationSound
