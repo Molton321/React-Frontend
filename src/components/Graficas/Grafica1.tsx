@@ -10,15 +10,8 @@ const Grafica1 = () => {
     const fetchData = async () => {
       try {
         const url = `${import.meta.env.VITE_GRAFICAS_URL}/grafica1`;
-        console.log(url);
-        
         const response = await axios.get(url);
-        console.log(response);
-        
         const data = response.data;
-
-        // Suponiendo que el JSON tiene la forma:
-        // [{ nombre: "Ventas", valor: 1200 }, { nombre: "Clientes", valor: 900 }, ...]
 
         const valores = data.map((item: any) => item.valor);
         const nombres = data.map((item: any) => item.nombre);
@@ -69,6 +62,11 @@ const Grafica1 = () => {
     },
     xaxis: {
       categories,
+      labels: {
+        style: {
+          colors: '#A0A0A0', // neutro para dark y light
+        },
+      },
     },
     yaxis: {
       labels: {
@@ -79,10 +77,16 @@ const Grafica1 = () => {
       text: 'Ventas por cada día de la semana',
       align: 'center',
       floating: true,
+      style: {
+        color: '#B0B0B0', // gris claro
+      },
     },
     subtitle: {
       text: 'Indicadores clave representados horizontalmente',
       align: 'center',
+      style: {
+        color: '#B0B0B0', // otro gris claro
+      },
     },
     tooltip: {
       theme: 'dark',
@@ -96,7 +100,7 @@ const Grafica1 = () => {
   };
 
   return (
-    <div id="chart">
+    <div id="chart" className="rounded-lg p-6 shadow-md bg-white dark:bg-boxdark">
       <ReactApexChart options={options} series={series} type="bar" height={380} />
     </div>
   );

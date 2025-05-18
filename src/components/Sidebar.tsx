@@ -111,9 +111,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     {/* <!-- Menu Item Calendar --> */}
                     <li>
                       <NavLink
-                        to="/"
+                        to="/productos"
                         className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343]
- duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('profile') && 'bg-bodydark1 dark:bg-meta-4'
+ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('productos') && 'bg-bodydark1 dark:bg-meta-4'
                           }`}
                       >
                         <span>Productos</span>
@@ -136,7 +136,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       <NavLink
                         to="/profile"
                         className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343]
- duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('profile') && 'bg-bodydark1 dark:bg-meta-4'
+ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-bodydark1 ${pathname.includes('profile') && 'bg-bodydark1 dark:bg-bodydark1'
                           }`}
                       >
                         <span>Restaurantes</span>
@@ -163,8 +163,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       <NavLink
                         to="/deliveryMap"
                         className={`group relative flex items-center rounded-sm py-2 px-4 font-bold  text-[#353343]
-duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('deliveryMap') &&
-                          'bg-graydark dark:bg-meta-4'
+duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-bodydark1 ${pathname.includes('deliveryMap') &&
+                          'bg-bodydark1 dark:bg-bodydark1'
                           }`}
                       >
                         <span>¿Dónde va mi pedido?</span>
@@ -190,8 +190,8 @@ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.incl
                       <NavLink
                         to="/tables"
                         className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343]
-duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('tables') &&
-                          'bg-graydark dark:bg-meta-4'
+duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-bodydark1 ${pathname.includes('tables') &&
+                          'bg-bodydark1 dark:bg-bodydark1'
                           }`}
                       >
                         <span>¿Cómo va mi negocio?</span>
@@ -325,7 +325,7 @@ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.incl
                             <li>
                               <NavLink
                                 to="/settings"
-                                className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-bold text-[#353343] duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes('settings') &&
+                                className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-bold text-[#353343] duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('settings') &&
                                   'bg-bodydark1 dark:bg-meta-4'
                                   }`}
                               >

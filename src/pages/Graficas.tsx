@@ -8,11 +8,24 @@ const Graficas = () => {
     <>
       <Breadcrumb pageName="¿Cómo va mi negocio?" />
 
-      <div className="flex flex-col gap-10">
-        <Grafica1 />
-        <Grafica2 />
-        <Grafica3 />
-      </div>
+     <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
+  {/* Gráfica 1: de barra horizontal, ocupa toda la fila */}
+  <div className="col-span-12">
+    <Grafica1 />
+  </div>
+
+  {/* Gráfica 2: donut */}
+  <div className="col-span-12 md:col-span-6 xl:col-span-4">
+    <Grafica2 />
+  </div>
+
+  {/* Gráfica 3: líneas estadísticas */}
+  <div className="col-span-12 md:col-span-6 xl:col-span-8">
+    <Grafica3 />
+  </div>
+</div>
+
+
     </>
   );
 };

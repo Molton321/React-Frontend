@@ -50,8 +50,11 @@ const Grafica3 = () => {
       dashArray: [0, 8, 5],
     },
     title: {
-      text: 'Page Statistics',
+      text: 'Estadísticas de tu negocio',
       align: 'left',
+      style: {
+        color: '#B0B0B0', // otro gris claro
+      },
     },
     legend: {
       tooltipHoverFormatter: function (val: string, opts: any) {
@@ -98,7 +101,7 @@ const Grafica3 = () => {
   };
 
   return (
-    <div id="chart">
+    <div id="chart" className="rounded-lg bg-white p-6 shadow-md dark:bg-boxdark">
       <ReactApexChart options={options} series={series} type="line" height={350} />
     </div>
   );

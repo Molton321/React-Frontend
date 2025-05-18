@@ -13,7 +13,6 @@ const Grafica2 = () => {
         const response = await axios.get(url);
         const data = response.data;
 
-        // Extraer valores y etiquetas
         const valores = data.map((item: any) => item.valor);
         const categorias = data.map((item: any) => item.categoria);
 
@@ -29,10 +28,10 @@ const Grafica2 = () => {
 
   const options: ApexCharts.ApexOptions = {
     chart: {
-      width: 380,
       type: 'donut',
+      width: '100%', // 👈 importante para hacerla responsive
     },
-    labels: labels,
+    labels,
     plotOptions: {
       pie: {
         startAngle: -90,
@@ -46,19 +45,23 @@ const Grafica2 = () => {
       type: 'gradient',
     },
     legend: {
-      formatter: function (val: string, opts: any) {
+      position: 'right',
+      formatter: (val: string, opts: any) => {
         return `${val} - ${opts.w.globals.series[opts.seriesIndex]}`;
       },
     },
     title: {
       text: 'Ventas por categoría',
+      style: {
+        color: '#B0B0B0',
+      },
     },
     responsive: [
       {
-        breakpoint: 480,
+        breakpoint: 768, // mejor breakpoint para móviles
         options: {
           chart: {
-            width: 200,
+            width: '100%',
           },
           legend: {
             position: 'bottom',
@@ -69,8 +72,8 @@ const Grafica2 = () => {
   };
 
   return (
-    <div id="chart">
-      <ReactApexChart options={options} series={series} type="donut" width={380} />
+    <div className="w-full max-w-md mx-auto rounded-lg bg-white p-6 shadow-md dark:bg-boxdark">
+      <ReactApexChart options={options} series={series} type="donut" />
     </div>
   );
 };
