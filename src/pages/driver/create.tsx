@@ -41,6 +41,7 @@ const CreateDriverPage: React.FC = () => {
         validationSchema={driverFormSchema}
         onSubmit={handleSubmit}
         submitLabel="Create Driver"
+        statusOptions={['available', 'busy', 'offline']}
       />
     </div>
   );
