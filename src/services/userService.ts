@@ -1,34 +1,19 @@
-<<<<<<< HEAD
-import { User } from "../models/user";
-=======
 import { User } from "../models/User";
->>>>>>> notificationSound
 import api from "../interceptors/axiosInterceptor";
 
 const API_URL = import.meta.env.VITE_API_URL+"/users"||""; // Reemplaza con la URL real
 
 // Obtener todos los usuarios
-<<<<<<< HEAD
-export const getUsers = async (): Promise<User[]> => {
-    console.log("aqui "+API_URL)
-    try {
-        const response = await api.get("/users");
-        return await response.data;
-=======
 /* export const getUsers = async (): Promise<User[]> => {
     console.log("aqui "+API_URL)
     try {
         const response = await fetch(API_URL); //LLama a la URL (axios mas optimo)
         if (!response.ok) throw new Error("Error al obtener usuarios");
         return await response.json(); //Casteo a json
->>>>>>> notificationSound
     } catch (error) {
         console.error(error);
         return [];
     }
-<<<<<<< HEAD
-};
-=======
 }; */
 
 
@@ -43,7 +28,6 @@ export const getUsers = async () => {
       throw error;
     }
   };
->>>>>>> notificationSound
 
 // Obtener un usuario por ID
 export const getUserById = async (id: number): Promise<User | null> => {
@@ -99,8 +83,4 @@ export const deleteUser = async (id: number): Promise<boolean> => {
         console.error(error);
         return false;
     }
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> notificationSound

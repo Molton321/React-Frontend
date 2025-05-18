@@ -11,11 +11,7 @@ const api = axios.create({
 // Interceptor de solicitud
 api.interceptors.request.use(
     (config) => {
-<<<<<<< HEAD
-        const user = JSON.parse(localStorage.getItem("user") || "{}");
-=======
         const user = JSON.parse(localStorage.getItem("user") || "{}"); //aqui metido está el token
->>>>>>> notificationSound
         // Verificar si la URL está en la lista de excluidas
         if (EXCLUDED_ROUTES.some((route) => config.url?.includes(route)) || !user) {
             return config;
@@ -23,10 +19,6 @@ api.interceptors.request.use(
         // Agregar token si la ruta no está excluida
         const token = user["token"]
         if (token) {
-<<<<<<< HEAD
-            console.log("agregando el token "+token)
-=======
->>>>>>> notificationSound
             config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
@@ -50,8 +42,4 @@ api.interceptors.response.use(
     }
 );
 
-<<<<<<< HEAD
 export default api;
-=======
-export default api;
->>>>>>> notificationSound
