@@ -16,20 +16,20 @@ const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
-  let googleUser: any;
 
   useEffect(() => {
     loadUser();
-    getUser();
+    fetchAccount();
     setTimeout(() => setLoading(false), 1000);
   }, []);
 
-  const loadUser = async () => {};
+  const loadUser = async () => {
+    const session = await account.getSession('current');
+    console.log('Current session:', session);
+  };
 
-  const getUser = async () => {
-    googleUser = await account.get();
-
-    localStorage.setItem('user', JSON.stringify(googleUser));
+  const fetchAccount = async () => {
+    account.get().then(console.log).catch(console.error);
   };
 
   return loading ? (
