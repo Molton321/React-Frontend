@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import GoogleButton from '../../components/GoogleButton';
 import GreenButton from '../../components/GreenButton';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,16 +9,34 @@ const SignIn: React.FC = () => {
     setIsDesktop(window.innerWidth > 768);
   };
 
+  const handleCredentialResponse = (response: any) => {
+    const { credential } = response;
+    console.log('Encoded JWT ID token: ' + credential);
+    if (credential) {
+      const user = JSON.parse(atob(credential.split('.')[1]));
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', credential); // Save the token to localStorage
+      window.location.href = '/';
+    }
+  };
+
   useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:
+        '295456302918-vv5kvp39q82c1joq8m6l04fjqetrpnt9.apps.googleusercontent.com',
+      callback: handleCredentialResponse,
+    });
+
+    google.accounts.id.renderButton(document.getElementById('google-button'), {
+      theme: 'outline',
+      size: 'large',
+    });
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  const handleGoogleSignIn = () => {
-    console.log('Google Sign-In triggered');
-  };
 
   const navigate = useNavigate();
 
@@ -31,9 +48,7 @@ const SignIn: React.FC = () => {
     <div className="flex h-screen flex-col md:flex-row">
       <div
         className="flex w-full h-full md:w-1/2 items-center justify-center sm:bg-white"
-        style={{
-          background: 'linear-gradient(to right, #31CA58, #19612C)',
-        }}
+        style={{ background: 'linear-gradient(to right, #31CA58, #19612C)' }}
       >
         <div
           className=" max-w-lg p-2 sm:p-20 bg-white rounded-lg shadow-sm md:p-8 dark:bg-gray-800 dark:border-gray-700"
@@ -45,11 +60,7 @@ const SignIn: React.FC = () => {
               <span className="emphasis">continuar</span>
             </h5>
             <div className="flex flex-col items-center space-y-2">
-              <GoogleButton onClick={handleGoogleSignIn}></GoogleButton>
-              <GreenButton
-                onClick={handleSignUpRedirect}
-                text={'No tengo una cuenta'}
-              ></GreenButton>
+              <div id="google-button"></div>
             </div>
             <div className="flex items-start">
               <label className="ms-2 text-sm md:text-xl text-center font-medium text-gray-900 dark:text-gray-300 mb-20">
@@ -108,11 +119,7 @@ const SignIn: React.FC = () => {
               <span className="emphasis">continuar</span>
             </h5>
             <div className="flex flex-col items-center space-y-4">
-              <GoogleButton onClick={handleGoogleSignIn}></GoogleButton>
-              <GreenButton
-                onClick={handleGoogleSignIn}
-                text={'Ya tengo una cuenta'}
-              ></GreenButton>
+              <div id="google-button"></div>
             </div>
             <div className="flex items-start">
               <label className="ms-2 text-xs md:text-lg text-center font-medium text-gray-900 dark:text-gray-300 mb-10">
