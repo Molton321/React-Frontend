@@ -10,11 +10,74 @@ const Settings = lazy(() => import('../pages/Settings'));
 const Tables = lazy(() => import('../pages/Tables'));
 const Alerts = lazy(() => import('../pages/UiElements/Alerts'));
 const Buttons = lazy(() => import('../pages/UiElements/Buttons'));
-
-const ListUsers = lazy(() => import('../pages/Users/page'));
-const CreatetUser = lazy(() => import('../pages/Users/create'));
-const UpdatetUser = lazy(() => import('../pages/Users/update'));
 const TestComponent = lazy(() => import('../components/TestComponent'));
+
+// Users
+const ListUsers = lazy(() => import('../pages/user/list'));
+const CreatetUser = lazy(() => import('../pages/user/create'));
+const UpdatetUser = lazy(() => import('../pages/user/update'));
+
+// Address
+const ListAddress = lazy(() => import('../pages/address/list'));
+const CreateAddress = lazy(() => import('../pages/address/create'));
+const UpdateAddress = lazy(() => import('../pages/address/update'));
+
+// Customer
+const ListCustomer = lazy(() => import('../pages/customer/list'));
+const CreateCustomer = lazy(() => import('../pages/customer/create'));
+const UpdateCustomer = lazy(() => import('../pages/customer/update'));
+
+// Driver
+const ListDriver = lazy(() => import('../pages/driver/list'));
+const CreateDriver = lazy(() => import('../pages/driver/create'));
+const UpdateDriver = lazy(() => import('../pages/driver/update'));
+
+// Issue
+const ListIssue = lazy(() => import('../pages/issue/list'));
+const CreateIssue = lazy(() => import('../pages/issue/create'));
+const UpdateIssue = lazy(() => import('../pages/issue/update'));
+
+// Menu
+const ListMenu = lazy(() => import('../pages/menu/list'));
+const CreateMenu = lazy(() => import('../pages/menu/create'));
+const UpdateMenu = lazy(() => import('../pages/menu/update'));
+
+// Motorcycle
+const ListMotorcycle = lazy(() => import('../pages/motorcycle/list'));
+const CreateMotorcycle = lazy(() => import('../pages/motorcycle/create'));
+const UpdateMotorcycle = lazy(() => import('../pages/motorcycle/update'));
+
+// Order
+const ListOrder = lazy(() => import('../pages/order/list'));
+const CreateOrder = lazy(() => import('../pages/order/create'));
+const UpdateOrder = lazy(() => import('../pages/order/update'));
+
+// Photo
+const ListPhoto = lazy(() => import('../pages/photo/list'));
+const CreatePhoto = lazy(() => import('../pages/photo/create'));
+const UpdatePhoto = lazy(() => import('../pages/photo/update'));
+
+// Product
+const ListProduct = lazy(() => import('../pages/product/list'));
+const CreateProduct = lazy(() => import('../pages/product/create'));
+const UpdateProduct = lazy(() => import('../pages/product/update'));
+
+// Restaurant
+const ListRestaurant = lazy(() => import('../pages/restaurant/list'));
+const CreateRestaurant = lazy(() => import('../pages/restaurant/create'));
+const UpdateRestaurant = lazy(() => import('../pages/restaurant/update'));
+
+// Shift
+const ListShift = lazy(() => import('../pages/shift/list'));
+const CreateShift = lazy(() => import('../pages/shift/create'));
+const UpdateShift = lazy(() => import('../pages/shift/update'));
+
+// User (already present, but for consistency)
+const ListUser = lazy(() => import('../pages/user/list'));
+const CreateUser = lazy(() => import('../pages/user/create'));
+const UpdateUser = lazy(() => import('../pages/user/update'));
+
+
 
 const coreRoutes = [
   {
@@ -81,7 +144,210 @@ const coreRoutes = [
     path: '/test',
     title: 'Test',
     component: TestComponent,
-  }  
+  },
+  // Address
+  {
+    path: '/address',
+    title: 'Address',
+    component: ListAddress,
+  },
+  {
+    path: '/address/create',
+    title: 'Create Address',
+    component: CreateAddress,
+  },
+  {
+    path: '/address/update/:id',
+    title: 'Update Address',
+    component: UpdateAddress,
+  },
+
+  // Customer
+  {
+    path: '/customer',
+    title: 'Customer',
+    component: ListCustomer,
+  },
+  {
+    path: '/customer/create',
+    title: 'Create Customer',
+    component: CreateCustomer,
+  },
+  {
+    path: '/customer/update/:id',
+    title: 'Update Customer',
+    component: UpdateCustomer,
+  },
+
+  // Driver
+  {
+    path: '/driver',
+    title: 'Driver',
+    component: ListDriver,
+  },
+  {
+    path: '/driver/create',
+    title: 'Create Driver',
+    component: CreateDriver,
+  },
+  {
+    path: '/driver/update/:id',
+    title: 'Update Driver',
+    component: UpdateDriver,
+  },
+
+  // Issue
+  {
+    path: '/issue',
+    title: 'Issue',
+    component: ListIssue,
+  },
+  {
+    path: '/issue/create',
+    title: 'Create Issue',
+    component: CreateIssue,
+  },
+  {
+    path: '/issue/update/:id',
+    title: 'Update Issue',
+    component: UpdateIssue,
+  },
+
+  // Menu
+  {
+    path: '/menu',
+    title: 'Menu',
+    component: ListMenu,
+  },
+  {
+    path: '/menu/create',
+    title: 'Create Menu',
+    component: CreateMenu,
+  },
+  {
+    path: '/menu/update/:id',
+    title: 'Update Menu',
+    component: UpdateMenu,
+  },
+
+  // Motorcycle
+  {
+    path: '/motorcycle',
+    title: 'Motorcycle',
+    component: ListMotorcycle,
+  },
+  {
+    path: '/motorcycle/create',
+    title: 'Create Motorcycle',
+    component: CreateMotorcycle,
+  },
+  {
+    path: '/motorcycle/update/:id',
+    title: 'Update Motorcycle',
+    component: UpdateMotorcycle,
+  },
+
+  // Order
+  {
+    path: '/order',
+    title: 'Order',
+    component: ListOrder,
+  },
+  {
+    path: '/order/create',
+    title: 'Create Order',
+    component: CreateOrder,
+  },
+  {
+    path: '/order/update/:id',
+    title: 'Update Order',
+    component: UpdateOrder,
+  },
+
+  // Photo
+  {
+    path: '/photo',
+    title: 'Photo',
+    component: ListPhoto,
+  },
+  {
+    path: '/photo/create',
+    title: 'Create Photo',
+    component: CreatePhoto,
+  },
+  {
+    path: '/photo/update/:id',
+    title: 'Update Photo',
+    component: UpdatePhoto,
+  },
+
+  // Product
+  {
+    path: '/product',
+    title: 'Product',
+    component: ListProduct,
+  },
+  {
+    path: '/product/create',
+    title: 'Create Product',
+    component: CreateProduct,
+  },
+  {
+    path: '/product/update/:id',
+    title: 'Update Product',
+    component: UpdateProduct,
+  },
+
+  // Restaurant
+  {
+    path: '/restaurant',
+    title: 'Restaurant',
+    component: ListRestaurant,
+  },
+  {
+    path: '/restaurant/create',
+    title: 'Create Restaurant',
+    component: CreateRestaurant,
+  },
+  {
+    path: '/restaurant/update/:id',
+    title: 'Update Restaurant',
+    component: UpdateRestaurant,
+  },
+
+  // Shift
+  {
+    path: '/shift',
+    title: 'Shift',
+    component: ListShift,
+  },
+  {
+    path: '/shift/create',
+    title: 'Create Shift',
+    component: CreateShift,
+  },
+  {
+    path: '/shift/update/:id',
+    title: 'Update Shift',
+    component: UpdateShift,
+  },
+
+  // User
+  {
+    path: '/user',
+    title: 'User',
+    component: ListUser,
+  },
+  {
+    path: '/user/create',
+    title: 'Create User',
+    component: CreateUser,
+  },
+  {
+    path: '/user/update/:id',
+    title: 'Update User',
+    component: UpdateUser,
+  },
 ];
 
 const routes = [...coreRoutes];
