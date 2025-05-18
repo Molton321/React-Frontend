@@ -9,32 +9,34 @@ const DefaultLayout = () => {
 
   return (
     <Provider store={store}>
-      <div className="dark:bg-boxdark-2 dark:text-bodydark">
-        {/* <!-- ===== Page Wrapper Start ===== --> */}
-        <div className="flex h-screen overflow-hidden">
-          {/* <!-- ===== Sidebar Start ===== --> */}
-          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-          {/* <!-- ===== Sidebar End ===== --> */}
+  <div className="dark:bg-boxdark-2 dark:text-bodydark">
+    <div className="flex h-screen overflow-hidden">
+      
+      {/* Sidebar */}
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-          {/* <!-- ===== Content Area Start ===== --> */}
-          <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
-            {/* <!-- ===== Header Start ===== --> */}
-            <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-            {/* <!-- ===== Header End ===== --> */}
+      {/* 🔲 Overlay */}
+      {sidebarOpen && (
+  <div
+    className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-[9980]"
+    onClick={() => setSidebarOpen(false)}
+  ></div>
+)}
 
-            {/* <!-- ===== Main Content Start ===== --> */}
-            <main>
-              <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-                <Outlet />
-              </div>
-            </main>
-            {/* <!-- ===== Main Content End ===== --> */}
+      {/* Main Content */}
+      <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden z-50">
+        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+        <main>
+          <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+            <Outlet />
           </div>
-          {/* <!-- ===== Content Area End ===== --> */}
-        </div>
-        {/* <!-- ===== Page Wrapper End ===== --> */}
+        </main>
       </div>
-    </Provider>
+    </div>
+  </div>
+</Provider>
+
   );
 };
 

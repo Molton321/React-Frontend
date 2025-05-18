@@ -14,7 +14,7 @@ const Navbar = () => {
     });
 
     return () => {
-      socket.off("new_notification");
+      //socket.off("new_notification");
     };
   }, []);
 
