@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import UserOne from '../images/user/user-01.png';
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 const DropdownUser = () => {
   const user = useSelector((state: RootState) => state.user.user); // Obtener el valor de la variable del usuario
@@ -38,6 +38,14 @@ const DropdownUser = () => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
+  // logout
+  const handleLogout = () => {
+    console.log('Logout');
+    localStorage.removeItem('user');
+    localStorage.removeItem('token'); // Remove the token from localStorage
+    window.location.href = '/auth/signin';
+  };
+
   return (
     <div className="relative">
       <Link
@@ -48,7 +56,7 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-          <h2>Bienvenido, {user?.name || "Invitado"}</h2>
+            <h2>Bienvenido, {user?.name || 'Invitado'}</h2>
           </span>
           <span className="block text-xs">UX Designer</span>
         </span>
@@ -158,7 +166,10 @@ const DropdownUser = () => {
             </Link>
           </li>
         </ul>
-        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button
+          className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+          onClick={handleLogout}
+        >
           <svg
             className="fill-current"
             width="22"
