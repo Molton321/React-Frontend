@@ -10,7 +10,7 @@ import { io } from "socket.io-client";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-// 🔧 Icono Leaflet (sin esto no aparece el marcador)
+// 🔧 Icono Leaflet
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -20,9 +20,11 @@ L.Icon.Default.mergeOptions({
 });
 
 const PLATE = "ABC124";
-const socket = io("http://localhost:5000");
+const url = import.meta.env.VITE_BACKEND_URL;
+const socket = io(url);
 
-// 📍 Componente auxiliar para centrar el mapa
+
+
 function ChangeMapView({ center }: { center: [number, number] }) {
   const map = useMap();
   useEffect(() => {
@@ -37,11 +39,12 @@ const SocketMap = () => {
   ]);
   const [isClient, setIsClient] = useState(false);
 
+  // 🧠 Lógica de suscripción WebSocket y limpieza al desmontar
   useEffect(() => {
     setIsClient(typeof window !== "undefined");
 
-    // 🟢 Iniciar tracking en backend
-    fetch(`http://localhost:5000/motorcycles/track/${PLATE}`, {
+    // 🟢 Iniciar tracking
+    fetch(`${url}/motorcycles/track/${PLATE}`, {
       method: "POST",
     })
       .then((res) => res.json())
@@ -51,18 +54,35 @@ const SocketMap = () => {
     // 📡 Escuchar coordenadas nuevas
     socket.on("actualizar_mapa", (data: { lat: number; lng: number }) => {
       if (typeof data.lat === "number" && typeof data.lng === "number") {
-        const newPos: [number, number] = [data.lat, data.lng];
-        console.log("📍 Nueva posición:", newPos);  // <- Para verificar
-        setPosition(newPos);
+        setPosition([data.lat, data.lng]);
       }
     });
 
+    // 🧹 Limpieza al desmontar
     return () => {
       socket.off("actualizar_mapa");
+      fetch(`${url}/motorcycles/stop/${PLATE}`, {
+        method: "POST",
+      });
+      console.log("🔴 Tracking detenido");
     };
   }, []);
 
-  // ⚠️ Evitar renderizado si no es cliente
+  // 🚪 Al cerrar la pestaña o recargar la página
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      navigator.sendBeacon(
+        `${url}/motorcycles/stop/${PLATE}`
+      );
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+  
   if (!isClient) return null;
 
   return (
@@ -77,7 +97,7 @@ const SocketMap = () => {
       />
       <ChangeMapView center={position} />
       <Marker key={position.join(",")} position={position}>
-        <Popup>📍 Posición en tiempo real</Popup>
+        <Popup>📍 ¡Aquí va tu pedido!</Popup>
       </Marker>
     </MapContainer>
   );
