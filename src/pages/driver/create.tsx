@@ -1,8 +1,12 @@
 import React from 'react';
 import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
+import driverService from '../../services/driverService';
+import Driver from '../../models/driver';
 
-const driverModel = {
+
+
+const driverModel: Omit<Driver, 'id' | 'createdAt'> = {
   name: '',
   license_number: '',
   phone: '',
@@ -23,10 +27,10 @@ const driverFormSchema = Yup.object({
 });
 
 const CreateDriverPage: React.FC = () => {
-  const handleSubmit = async (values: Record<string, any>) => {
+  const handleSubmit = async (values: Omit<Driver, 'id' | 'createdAt'>) => {
     // Replace with your API call
     try {
-      // await api.post("/drivers", values);
+      await driverService.createDriver(values);
       alert('Driver created successfully!');
     } catch (error) {
       alert('Failed to create driver.');

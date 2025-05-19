@@ -26,7 +26,7 @@ const ReferenceSelect: React.FC<ReferenceSelectProps> = ({
       setLoading(true);
       try {
         // Import dinámico del service
-        const serviceModule = await import(`../services/${model}Service`);
+        const serviceModule = await import(`../services/${model}Service.ts`/* @vite-ignore */);
         // Busca el método get...s o getAll...
         const service = serviceModule.default || Object.values(serviceModule)[0];
         let data: any[] = [];

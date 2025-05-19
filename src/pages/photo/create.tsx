@@ -1,51 +1,155 @@
 import React from 'react';
-import UniversalForm from '../../components/UniversalForm';
-import * as Yup from 'yup';
-import Photo from '../../models/photo';
 import photoService from '../../services/photoService';
+import ReferenceSelect from '../../components/ReferenceSelect';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-
-const photoModel: Omit<Photo, 'id' | 'createdAt'> = {
-  issue_id: 0,
+const initialValues = {
+  issue_id: '',
   image_url: '',
   caption: '',
-  takenAt: new Date(),
+  takenAt: '',
+  file: undefined as File | undefined,
 };
 
-const photoFormSchema = Yup.object({
-  issue_id: Yup.number().typeError('Debe ser un número').required('El ID del issue es obligatorio'),
-  image_url: Yup.string().required('La URL de la imagen es obligatoria'),
-  caption: Yup.string(),
-  takenAt: Yup.date().typeError('Debe ser una fecha'),
-});
-
-const CreatePhotoPage: React.FC = () => {
-  const handleSubmit = async (values: typeof photoModel) => {
-    try {
-      // Construir FormData para subida de foto
-      const formData = new FormData();
-      formData.append('issue_id', String(values.issue_id));
-      formData.append('image_url', values.image_url);
-      if (values.caption) formData.append('caption', values.caption);
-      if (values.takenAt) formData.append('takenAt', new Date(values.takenAt).toISOString());
-      await photoService.uploadPhoto(Number(values.issue_id), formData);
-      alert('Photo created successfully!');
-    } catch (error) {
-      alert('Failed to create photo.');
+const PhotoSimpleForm: React.FC = () => {
+  const handleUpload = async (values: typeof initialValues, setFieldValue: (field: string, value: any) => void) => {
+    if (!values.file) {
+      alert('Selecciona un archivo primero');
+      return;
+    }
+    const url = await photoService.uploadImage({
+      file: values.file,
+      issue_id: values.issue_id,
+      caption: values.caption,
+      takenAt: values.takenAt,
+    });
+    console.log('URL de la imagen:', url);
+    if (url) {
+      setFieldValue('image_url', url);
+      alert('Imagen subida correctamente: ' + url);
+    } else {
+      alert('Error al subir la imagen');
     }
   };
 
+  const handleSubmit = async (values: typeof initialValues) => {
+    await photoService.createPhoto({
+      issue_id: Number(values.issue_id),
+      image_url: "/uploads/" + values.image_url,
+      caption: values.caption,
+      takenAt: values.takenAt ? new Date(values.takenAt) : undefined,
+    });
+    alert('Foto enviada');
+  };
+
   return (
-    <div>
-      <h1>Create Photo</h1>
-      <UniversalForm
-        model={photoModel}
-        validationSchema={photoFormSchema}
-        onSubmit={handleSubmit}
-        submitLabel="Create Photo"
-      />
-    </div>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      {({ setFieldValue, values, isSubmitting }) => (
+        <Form className="grid grid-cols-1 gap-4 p-6 bg-white dark:bg-boxdark rounded-md shadow-md dark:shadow-none max-w-lg mx-auto">
+          <label className="block">
+            <span className="block text-lg font-medium text-gray-700 dark:text-white">Issue:</span>
+            <ReferenceSelect
+              name="issue_id"
+              model="issue"
+              labelKey="description"
+              valueKey="id"
+              className="w-full border rounded-md p-2 bg-white dark:bg-form-input dark:border-form-strokedark dark:text-white"
+              disabled={false}
+            />
+          </label>
+          <label className="block">
+            <span className="block text-lg font-medium text-gray-700 dark:text-white">URL de la imagen:</span>
+            <Field
+              type="text"
+              name="image_url"
+              disabled
+              value={values.file ? values.file.name.replace(/\s+/g, '-') : values.image_url}
+              className="w-full border rounded-md p-2 bg-white dark:bg-form-input dark:border-form-strokedark dark:text-white cursor-not-allowed"
+            />
+          </label>
+          <label className="block">
+            <span className="block text-lg font-medium text-gray-700 dark:text-white">Caption:</span>
+            <Field
+              type="text"
+              name="caption"
+              className="w-full border rounded-md p-2 bg-white dark:bg-form-input dark:border-form-strokedark dark:text-white"
+            />
+          </label>
+          <label className="block">
+            <span className="block text-lg font-medium text-gray-700 dark:text-white">Fecha de la foto:</span>
+            <Field
+              type="date"
+              name="takenAt"
+              className="w-full border rounded-md p-2 bg-white dark:bg-form-input dark:border-form-strokedark dark:text-white"
+            />
+          </label>
+          <label className="block">
+            <span className="block text-lg font-medium text-gray-700 dark:text-white">Archivo:</span>
+            <div className="flex flex-col gap-2">
+              {/* Previsualización */}
+              {values.file ? (
+                <div className="flex flex-col items-center gap-2">
+                  <img
+                    src={URL.createObjectURL(values.file)}
+                    alt="preview"
+                    className="max-h-48 rounded shadow border border-gray-200 dark:border-form-strokedark object-contain"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFieldValue('file', undefined);
+                      setFieldValue('image_url', '');
+                    }}
+                    className="mt-2 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                  >
+                    Quitar imagen
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <input
+                    id="file-upload"
+                    type="file"
+                    name="file"
+                    accept="image/*"
+                    onChange={e => {
+                      if (e.currentTarget.files && e.currentTarget.files[0]) {
+                        const file = e.currentTarget.files[0];
+                        setFieldValue('file', file);
+                        setFieldValue('image_url', file.name.replace(/\s+/g, '-'));
+                      }
+                    }}
+                    className="hidden"
+                  />
+                  <label htmlFor="file-upload">
+                    <span className="inline-block px-4 py-2 bg-primary text-white rounded-md cursor-pointer hover:bg-primary/80 transition-colors">
+                      Seleccionar imagen
+                    </span>
+                  </label>
+                </>
+              )}
+            </div>
+          </label>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                if (values.file) {
+                  handleUpload(values, setFieldValue);
+                } else {
+                  alert('Selecciona un archivo primero');
+                }
+              }}
+              className="py-2 px-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800"
+              disabled={isSubmitting}
+            >
+              Subir Imagen
+            </button>
+          </div>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
-export default CreatePhotoPage;
+export default PhotoSimpleForm;

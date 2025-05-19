@@ -1,11 +1,54 @@
 import axios from 'axios';
 import Photo from '../models/photo';
 
-const BASE_URL = '/photos';
+const BASE_URL = `${import.meta.env.VITE_API_URL}/photos`;
 
 export class PhotoService {
-    private baseUrl = BASE_URL;
+    /**
+     * Sube solo la imagen y devuelve la URL generada por el backend
+     */
+    async uploadImage(data: { file: File; issue_id: string | number; caption?: string; takenAt?: string }): Promise<string | null> {
+        try {
+            const formData = new FormData();
+            formData.append('file', data.file);
+            formData.append('issue_id', String(data.issue_id));
+            if (data.caption) formData.append('caption', data.caption);
+            if (data.takenAt) formData.append('takenAt', data.takenAt);
+            const response = await axios.post(`${this.baseUrl}/upload`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            return response.data[0].image_url || response.data[0].url || response.data[0].path || null;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
+    /**
+     * Crea una foto usando JSON plano (sin archivo, solo URL)
+     */
+    async createPhoto(photo: Partial<Photo>): Promise<Photo | null> {
+        try {
+            const response = await axios.post(this.baseUrl, photo);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
 
+    /**
+     * Actualiza una foto existente (PUT)
+     */
+    async updatePhoto(id: number, photo: Partial<Photo>): Promise<Photo | null> {
+        try {
+            const response = await axios.put(`${this.baseUrl}/${id}`, photo);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
+    private baseUrl = BASE_URL
     async getPhotos(filters?: {
         issue_id?: number;
     }): Promise<Photo[]> {
@@ -46,6 +89,15 @@ export class PhotoService {
         } catch (error) {
             console.error(error);
             return null;
+        }
+    }
+    async deletePhoto(id: number): Promise<boolean> {
+        try {
+            await axios.delete(`${this.baseUrl}/${id}`);
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
         }
     }
 }
