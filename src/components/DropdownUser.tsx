@@ -58,10 +58,9 @@ const DropdownUser = () => {
           <span className="block text-sm font-medium text-black dark:text-white">
             {user?.name}
           </span>
-          <span className="block text-xs">UX Designer</span>
         </span>
 
-        <span className="h-12 w-12 rounded-full">
+        <span className="h-10 w-10 rounded-full">
           <img src={UserOne} alt="User" />
         </span>
 
@@ -97,7 +96,7 @@ const DropdownUser = () => {
           <li>
             <Link
               to="/profile"
-              className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+              className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out  lg:text-base"
             >
               <svg
                 className="fill-current"
@@ -122,7 +121,7 @@ const DropdownUser = () => {
           <li>
             <Link
               to="#"
-              className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+              className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out  lg:text-base"
             >
               <svg
                 className="fill-current"
@@ -143,7 +142,7 @@ const DropdownUser = () => {
           <li>
             <Link
               to="/settings"
-              className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+              className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out lg:text-base"
             >
               <svg
                 className="fill-current"
@@ -168,7 +167,7 @@ const DropdownUser = () => {
         </ul>
         <button
           onClick={logOut}
-          className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+          className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out  lg:text-base"
         >
           <svg
             className="fill-current"
