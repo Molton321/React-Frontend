@@ -13,3 +13,6 @@ export interface User {
     token?:string;
     birthdate?: string;
 }
+
+
+export default User;

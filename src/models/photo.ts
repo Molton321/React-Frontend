@@ -5,6 +5,7 @@ interface Photo {
     caption?: string;
     takenAt?: Date;
     createdAt: Date;
+    file?: File;
 }
 
 export default Photo;

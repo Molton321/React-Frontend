@@ -1,5 +1,5 @@
 import React, { useState } from 'react'; // Asegúrate de importar useState
-import { User } from '../../models/User';
+import { User } from '../../models/user';
 import UserFormValidator from '../../components/Users/UserFormValidator'; 
 
 import Swal from 'sweetalert2';

@@ -5,7 +5,7 @@ interface Order {
     motorcycle_id?: number;
     quantity: number;
     total_price: number;
-    status: 'pending' | 'confirmed' | 'preparing' | 'ready' | 'picked_up' | 'delivered' | 'cancelled';
+    status: 'pending' | 'confirmed' | 'in_progress' | 'delivered' | 'cancelled';
     createdAt: Date;
 
 }

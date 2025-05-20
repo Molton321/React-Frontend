@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getUserById, updateUser } from "../../services/userService";
 import Swal from "sweetalert2";
 
-import { User } from '../../models/User';
+import { User } from '../../models/user';
 import UserFormValidator from '../../components/Users/UserFormValidator';
 import Breadcrumb from "../../components/Breadcrumb";
 

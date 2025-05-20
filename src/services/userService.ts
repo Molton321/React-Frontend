@@ -1,86 +1,57 @@
-import { User } from "../models/User";
-import api from "../interceptors/axiosInterceptor";
+import axios from 'axios';
+import User from '../models/user';
+export class UserService {
+    private baseUrl = `${import.meta.env.VITE_API_URL}/users`;
 
-const API_URL = import.meta.env.VITE_API_URL+"/users"||""; // Reemplaza con la URL real
-
-// Obtener todos los usuarios
-/* export const getUsers = async (): Promise<User[]> => {
-    console.log("aqui "+API_URL)
-    try {
-        const response = await fetch(API_URL); //LLama a la URL (axios mas optimo)
-        if (!response.ok) throw new Error("Error al obtener usuarios");
-        return await response.json(); //Casteo a json
-    } catch (error) {
-        console.error(error);
-        return [];
+    async getUsers(): Promise<User[]> {
+        try {
+            const response = await axios.get(this.baseUrl);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
     }
-}; */
 
-
-export const getUsers = async () => {
-    try {
-      const response = await api.get("/users/list");
-      console.log(response);
-      
-      return response.data;
-    } catch (error) {
-      console.error("Error al obtener usuarios", error);
-      throw error;
+    async getUserById(id: number): Promise<User | null> {
+        try {
+            const response = await axios.get(`${this.baseUrl}/${id}`);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
     }
-  };
 
-// Obtener un usuario por ID
-export const getUserById = async (id: number): Promise<User | null> => {
-    try {
-        const response = await fetch(`${API_URL}/${id}`);
-        if (!response.ok) throw new Error("Usuario no encontrado");
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        return null;
+    async createUser(user: Omit<User, 'id'>): Promise<User | null> {
+        try {
+            const response = await axios.post(this.baseUrl, user);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
     }
-};
 
-// Crear un nuevo usuario
-export const createUser = async (user: Omit<User, "id">): Promise<User | null> => {
-    try {
-        const response = await fetch(API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user),
-        });
-        if (!response.ok) throw new Error("Error al crear usuario");
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        return null;
+    async updateUser(id: number, user: Partial<User>): Promise<User | null> {
+        try {
+            const response = await axios.put(`${this.baseUrl}/${id}`, user);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
     }
-};
 
-// Actualizar usuario
-export const updateUser = async (id: number, user: Partial<User>): Promise<User | null> => {
-    try {
-        const response = await fetch(`${API_URL}/${id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user),
-        });
-        if (!response.ok) throw new Error("Error al actualizar usuario");
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        return null;
+    async deleteUser(id: number): Promise<boolean> {
+        try {
+            await axios.delete(`${this.baseUrl}/${id}`);
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
     }
-};
+}
 
-// Eliminar usuario
-export const deleteUser = async (id: number): Promise<boolean> => {
-    try {
-        const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-        if (!response.ok) throw new Error("Error al eliminar usuario");
-        return true;
-    } catch (error) {
-        console.error(error);
-        return false;
-    }
-};
+export default new UserService();
