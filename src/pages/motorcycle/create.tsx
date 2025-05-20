@@ -6,14 +6,14 @@ import motorcycleService from '../../services/motorcycleService';
 import { useNavigate } from 'react-router-dom';
 
 const motorcycleModel: Omit<Motorcycle, 'id' | 'createdAt'> = {
-  licensePlate: '',
+  license_plate: '',
   brand: '',
   year: 0,
   status: 'active',
 };
 
 const motorcycleFormSchema = Yup.object({
-  licensePlate: Yup.string().required('La placa es obligatoria'),
+  license_plate: Yup.string().required('La placa es obligatoria'),
   brand: Yup.string().required('La marca es obligatoria'),
   year: Yup.number().typeError('Debe ser un número').required('El año es obligatorio'),
   status: Yup.string().required('El estado es obligatorio'),

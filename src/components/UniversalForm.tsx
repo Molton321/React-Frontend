@@ -62,7 +62,8 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
                   key === 'menu' ||
                   key === 'address' ||
                   key === 'driver' ||
-                  key === 'createdAt')
+                  key === 'createdAt'||
+                  key === 'photos')
               )
                 return false;
               return true;

@@ -6,7 +6,7 @@ import motorcycleService from '../../services/motorcycleService';
 import { useParams } from 'react-router-dom';
 
 const motorcycleFormSchema = Yup.object({
-    licensePlate: Yup.string().required('La placa es obligatoria'),
+    license_plate: Yup.string().required('La placa es obligatoria'),
     brand: Yup.string().required('La marca es obligatoria'),
     year: Yup.number().required('El año es obligatorio'),
     status: Yup.string().required('El estado es obligatorio'),

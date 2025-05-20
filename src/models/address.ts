@@ -1,6 +1,6 @@
 interface Address {
     id: number;
-    order_id: number;
+    order_id?: number;
     street: string;
     city: string;
     state: string;
