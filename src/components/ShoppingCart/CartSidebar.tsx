@@ -8,7 +8,7 @@ interface CartSidebarProps {
 const CartSidebar = ({ isOpen, onClose }: CartSidebarProps) => {
   return (
     <div
-      className={`fixed top-0 right-0 z-50 h-screen w-80 bg-white shadow-lg transform transition-transform duration-300 ${
+      className={`fixed top-0 right-0 z-50 h-screen w-80 dark:bg-boxdark bg-white shadow-lg transform transition-transform duration-300 ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
@@ -44,7 +44,7 @@ const CartSidebar = ({ isOpen, onClose }: CartSidebarProps) => {
               />
             </svg>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-300">
+          <p className="text-sm text-gray-600 dark:text-gray-300 dark:text-white">
             Aún no tienes productos en tu canasta
           </p>
         </div>

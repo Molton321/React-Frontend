@@ -280,7 +280,7 @@ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.incl
                             </clipPath>
                           </defs>
                         </svg>
-                        Settings
+                        Configuraciones
                       </NavLink>
                     </li>
 
