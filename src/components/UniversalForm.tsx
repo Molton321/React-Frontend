@@ -45,7 +45,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
             <h3 className="font-medium text-black dark:text-white text-xl">{formTitle}</h3>
             <button
               type="button"
-              className="flex items-center gap-2 w-fit mb-2 text-gray-700 dark:text-white hover:text-primary dark:hover:text-primary font-medium"
+              className="flex items-center gap-2 w-fit mb-2 text-gray-700 dark:text-white hover:text-primary dark:hover:text-primary font-medium transition-colors duration-150"
               onClick={() => navigate(-1)}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
@@ -91,7 +91,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
                 <ErrorMessage
                   name={key}
                   component="p"
-                  className="text-red-500 text-sm dark:text-red-400"
+                  className="text-danger text-sm dark:text-red-400"
                 />
               </div>
             ))}
@@ -99,7 +99,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
             <div className="flex gap-2">
               <button
                 type="submit"
-                className="py-2 px-4 text-white bg-primary rounded-md hover:bg-blue-700 dark:bg-primary dark:hover:bg-primary/80"
+                className="py-2 px-4 text-white rounded-md hover:bg-blue-700 bg-[#29D884] hover:bg-[#27b16e]"
               >
                 {submitLabel}
               </button>

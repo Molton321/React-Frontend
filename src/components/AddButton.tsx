@@ -12,7 +12,7 @@ const AddButton: React.FC<AddButtonProps> = ({ label, to }) => {
     <button
       type="button"
       className="flex items-center gap-2 px-4 py-2 rounded-md font-medium shadow transition-colors duration-150
-        bg-primary hover:bg-blue-700 active:bg-blue-800 text-white
+        bg-[#29D884] hover:bg-[#27b16e] active:bg-blue-800 text-white
         dark:bg-blue-500 dark:hover:bg-blue-600 dark:active:bg-blue-700
         focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900 "
       onClick={() => navigate(to)}

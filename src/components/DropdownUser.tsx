@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import UserOne from '../images/user/user-01.png';
 import { useSelector } from 'react-redux';
 import { RootState } from '../stores/store';
 import securityService from '../services/securityService';
@@ -16,7 +15,7 @@ const DropdownUser = () => {
   const logOut = () => {
     securityService.logout();
     console.log('Logout');
-    
+
     navigate('/auth/signIn');
   };
 
@@ -46,6 +45,14 @@ const DropdownUser = () => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
+// Obtener la foto de perfil desde localStorage
+const storedUser = localStorage.getItem('user');
+const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+const profilePhoto =
+  (parsedUser && parsedUser.picture) ||
+  'https://ui-avatars.com/api/?name=User';
+
+
   return (
     <div className="relative">
       <Link
@@ -61,7 +68,13 @@ const DropdownUser = () => {
         </span>
 
         <span className="h-10 w-10 rounded-full">
-          <img src={UserOne} alt="User" />
+          <img
+  src={profilePhoto || 'https://ui-avatars.com/api/?name=User'}
+  alt="User"
+  className="object-cover h-10 w-10 rounded-full"
+  referrerPolicy="no-referrer"
+/>
+
         </span>
 
         <svg

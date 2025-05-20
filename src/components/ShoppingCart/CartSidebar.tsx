@@ -1,4 +1,5 @@
 import { IoClose } from 'react-icons/io5';
+import { NavLink } from 'react-router-dom';
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -49,9 +50,11 @@ const CartSidebar = ({ isOpen, onClose }: CartSidebarProps) => {
           </p>
         </div>
 
-        <button className="mt-6 w-full bg-[#29D884] hover:bg-emerald-600 text-white font-semibold py-2 rounded-md transition">
-          Comenzar a comprar
-        </button>
+        <NavLink to="/order/create">
+          <button className="mt-6 w-full bg-[#29D884] hover:bg-emerald-600 text-white font-semibold py-2 rounded-md transition">
+            Comenzar a comprar
+          </button>
+        </NavLink>
       </div>
     </div>
   );
