@@ -1,11 +1,11 @@
-import axios from 'axios';
+import api from '../interceptors/axiosInterceptor';
 import User from '../models/user';
 export class UserService {
     private baseUrl = `${import.meta.env.VITE_API_URL}/users`;
 
     async getUsers(): Promise<User[]> {
         try {
-            const response = await axios.get(this.baseUrl);
+            const response = await api.get(this.baseUrl);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -15,7 +15,7 @@ export class UserService {
 
     async getUserById(id: number): Promise<User | null> {
         try {
-            const response = await axios.get(`${this.baseUrl}/${id}`);
+            const response = await api.get(`${this.baseUrl}/${id}`);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -25,7 +25,7 @@ export class UserService {
 
     async createUser(user: Omit<User, 'id'>): Promise<User | null> {
         try {
-            const response = await axios.post(this.baseUrl, user);
+            const response = await api.post(this.baseUrl, user);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -35,7 +35,7 @@ export class UserService {
 
     async updateUser(id: number, user: Partial<User>): Promise<User | null> {
         try {
-            const response = await axios.put(`${this.baseUrl}/${id}`, user);
+            const response = await api.put(`${this.baseUrl}/${id}`, user);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -45,7 +45,7 @@ export class UserService {
 
     async deleteUser(id: number): Promise<boolean> {
         try {
-            await axios.delete(`${this.baseUrl}/${id}`);
+            await api.delete(`${this.baseUrl}/${id}`);
             return true;
         } catch (error) {
             console.error(error);

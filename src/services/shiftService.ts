@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../interceptors/axiosInterceptor';
 import Shift from '../models/shift';
 
 export class ShiftService {
@@ -14,7 +14,7 @@ export class ShiftService {
             const params: any = { ...filters };
             if (filters?.startTime && typeof filters.startTime !== 'string') params.startTime = (filters.startTime as Date).toISOString();
             if (filters?.endTime && typeof filters.endTime !== 'string') params.endTime = (filters.endTime as Date).toISOString();
-            const response = await axios.get(this.baseUrl, { params });
+            const response = await api.get(this.baseUrl, { params });
             return response.data;
         } catch (error) {
             console.error(error);
@@ -24,7 +24,7 @@ export class ShiftService {
 
     async getShiftById(id: number): Promise<Shift | null> {
         try {
-            const response = await axios.get(`${this.baseUrl}/${id}`);
+            const response = await api.get(`${this.baseUrl}/${id}`);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -34,7 +34,7 @@ export class ShiftService {
 
     async createShift(shift: Omit<Shift, 'id' | 'createdAt'>): Promise<Shift | null> {
         try {
-            const response = await axios.post(this.baseUrl, shift);
+            const response = await api.post(this.baseUrl, shift);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -44,7 +44,7 @@ export class ShiftService {
 
     async updateShift(id: number, shift: Partial<Shift>): Promise<Shift | null> {
         try {
-            const response = await axios.put(`${this.baseUrl}/${id}`, shift);
+            const response = await api.put(`${this.baseUrl}/${id}`, shift);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -54,7 +54,7 @@ export class ShiftService {
 
     async deleteShift(id: number): Promise<boolean> {
         try {
-            await axios.delete(`${this.baseUrl}/${id}`);
+            await api.delete(`${this.baseUrl}/${id}`);
             return true;
         } catch (error) {
             console.error(error);

@@ -12,8 +12,8 @@ const SignIn: React.FC = () => {
     console.log('Encoded JWT ID token: ' + credential);
     if (credential) {
       const user = JSON.parse(atob(credential.split('.')[1]));
+      user.token = credential; // Add token inside user object
       localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('token', credential); // Save the token to localStorage
       window.location.href = '/';
     }
   };

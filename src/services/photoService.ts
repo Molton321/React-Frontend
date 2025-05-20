@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../interceptors/axiosInterceptor';
 import Photo from '../models/photo';
 
 const BASE_URL = `${import.meta.env.VITE_API_URL}/photos`;
@@ -14,7 +14,7 @@ export class PhotoService {
             formData.append('issue_id', String(data.issue_id));
             if (data.caption) formData.append('caption', data.caption);
             if (data.takenAt) formData.append('takenAt', data.takenAt);
-            const response = await axios.post(`${this.baseUrl}/upload`, formData, {
+            const response = await api.post(`${this.baseUrl}/upload`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             return response.data[0].image_url || response.data[0].url || response.data[0].path || null;
@@ -28,7 +28,7 @@ export class PhotoService {
      */
     async createPhoto(photo: Partial<Photo>): Promise<Photo | null> {
         try {
-            const response = await axios.post(this.baseUrl, photo);
+            const response = await api.post(this.baseUrl, photo);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -41,7 +41,7 @@ export class PhotoService {
      */
     async updatePhoto(id: number, photo: Partial<Photo>): Promise<Photo | null> {
         try {
-            const response = await axios.put(`${this.baseUrl}/${id}`, photo);
+            const response = await api.put(`${this.baseUrl}/${id}`, photo);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -53,7 +53,7 @@ export class PhotoService {
         issue_id?: number;
     }): Promise<Photo[]> {
         try {
-            const response = await axios.get(this.baseUrl, { params: filters });
+            const response = await api.get(this.baseUrl, { params: filters });
             return response.data;
         } catch (error) {
             console.error(error);
@@ -63,7 +63,7 @@ export class PhotoService {
 
     async getPhotoById(id: number): Promise<Photo | null> {
         try {
-            const response = await axios.get(`${this.baseUrl}/${id}`);
+            const response = await api.get(`${this.baseUrl}/${id}`);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -75,7 +75,7 @@ export class PhotoService {
         caption?: string;
     }): Promise<Photo | null> {
         try {
-            const response = await axios.post(
+            const response = await api.post(
                 `${this.baseUrl}/upload/${issue_id}`,
                 photo,
                 {
@@ -93,7 +93,7 @@ export class PhotoService {
     }
     async deletePhoto(id: number): Promise<boolean> {
         try {
-            await axios.delete(`${this.baseUrl}/${id}`);
+            await api.delete(`${this.baseUrl}/${id}`);
             return true;
         } catch (error) {
             console.error(error);

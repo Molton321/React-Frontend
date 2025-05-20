@@ -3,6 +3,7 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import InputSelector from './InputSelector';
 import { useNavigate } from 'react-router-dom';
+import BackButton from './BackButton';
 
 interface DynamicFormProps {
   model: { [key: string]: any };
@@ -27,8 +28,6 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
   hideItems = true,
   formTitle = '', // <-- default vacío
 }) => {
-  const navigate = useNavigate();
-
   return (
     <Formik
       initialValues={model}
@@ -42,21 +41,30 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
         >
           {/* Encabezado con título y botón de retroceso */}
           <div className="flex items-center justify-between">
-            <h3 className="font-medium text-black dark:text-white text-xl">{formTitle}</h3>
-            <button
-              type="button"
-              className="flex items-center gap-2 w-fit mb-2 text-gray-700 dark:text-white hover:text-primary dark:hover:text-primary font-medium transition-colors duration-150"
-              onClick={() => navigate(-1)}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-              </svg>
-              Back
-            </button>
+            <h3 className="font-medium text-black dark:text-white text-xl">
+              {formTitle}
+            </h3>
+            <BackButton
+              route={-1}
+              className="text-gray-500 dark:text-white"
+            ></BackButton>
           </div>
           {Object.keys(model)
             .filter((key) => {
-              if (hideItems && (key === 'id' || key === 'created_at' || key === 'motorcycle' || key === 'restaurant' || key === 'product' || key == 'customer' || key === 'menu' || key === 'address' || key === 'driver' || key === 'createdAt')) return false;
+              if (
+                hideItems &&
+                (key === 'id' ||
+                  key === 'created_at' ||
+                  key === 'motorcycle' ||
+                  key === 'restaurant' ||
+                  key === 'product' ||
+                  key == 'customer' ||
+                  key === 'menu' ||
+                  key === 'address' ||
+                  key === 'driver' ||
+                  key === 'createdAt')
+              )
+                return false;
               return true;
             })
             .map((key) => (
@@ -65,19 +73,31 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
                   htmlFor={key}
                   className="block text-lg font-medium text-gray-700 dark:text-white"
                 >
-                  {key.endsWith('_id')
-                    ? (<>
-                      <span className="font-semibold text-primary dark:text-primary">ID</span>
+                  {key.endsWith('_id') ? (
+                    <>
+                      <span className="font-semibold text-primary dark:text-primary">
+                        ID
+                      </span>
                       <span className="mx-1">/</span>
-                      {key.replace(/_id$/, '').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                    </>)
-                    : key.charAt(0).toUpperCase() + key.slice(1)
-                  }
+                      {key
+                        .replace(/_id$/, '')
+                        .replace(/_/g, ' ')
+                        .replace(/\b\w/g, (l) => l.toUpperCase())}
+                    </>
+                  ) : (
+                    key.charAt(0).toUpperCase() + key.slice(1)
+                  )}
                 </label>
                 <InputSelector
                   name={key}
                   value={values[key]}
-                  options={key === 'status' ? statusOptions : key === 'issue_type' ? issuesOptions : undefined}
+                  options={
+                    key === 'status'
+                      ? statusOptions
+                      : key === 'issue_type'
+                        ? issuesOptions
+                        : undefined
+                  }
                   type={
                     typeof model[key] === 'boolean'
                       ? 'checkbox'

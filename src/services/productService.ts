@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../interceptors/axiosInterceptor';
 import Product from '../models/product';
 
 const BASE_URL = `${import.meta.env.VITE_API_URL}/products`;
@@ -10,7 +10,7 @@ export class ProductService {
         category?: string;
     }): Promise<Product[]> {
         try {
-            const response = await axios.get(this.baseUrl, { params: filters });
+            const response = await api.get(this.baseUrl, { params: filters });
             return response.data;
         } catch (error) {
             console.error(error);
@@ -20,7 +20,7 @@ export class ProductService {
 
     async getProductById(id: number): Promise<Product | null> {
         try {
-            const response = await axios.get(`${this.baseUrl}/${id}`);
+            const response = await api.get(`${this.baseUrl}/${id}`);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -30,7 +30,7 @@ export class ProductService {
 
     async createProduct(product: Omit<Product, 'id' | 'createdAt'>): Promise<Product | null> {
         try {
-            const response = await axios.post(this.baseUrl, product);
+            const response = await api.post(this.baseUrl, product);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -40,7 +40,7 @@ export class ProductService {
 
     async updateProduct(id: number, product: Partial<Product>): Promise<Product | null> {
         try {
-            const response = await axios.put(`${this.baseUrl}/${id}`, product);
+            const response = await api.put(`${this.baseUrl}/${id}`, product);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -50,7 +50,7 @@ export class ProductService {
 
     async deleteProduct(id: number): Promise<boolean> {
         try {
-            await axios.delete(`${this.baseUrl}/${id}`);
+            await api.delete(`${this.baseUrl}/${id}`);
             return true;
         } catch (error) {
             console.error(error);
