@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../interceptors/axiosInterceptor';
 import Menu from '../models/menu';
 
 const BASE_URL = `${import.meta.env.VITE_API_URL}/menus`;
@@ -8,7 +8,7 @@ export class MenuService {
 
     async getMenus(): Promise<Menu[]> {
         try {
-            const response = await axios.get(this.baseUrl);
+            const response = await api.get(this.baseUrl);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -18,7 +18,7 @@ export class MenuService {
 
     async getMenuById(id: number): Promise<Menu | null> {
         try {
-            const response = await axios.get(`${this.baseUrl}/${id}`);
+            const response = await api.get(`${this.baseUrl}/${id}`);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -28,7 +28,7 @@ export class MenuService {
 
     async getMenuByRestaurant(restaurant_id: number): Promise<Menu[] | null> {
         try {
-            const response = await axios.get(`${this.baseUrl}/restaurant/${restaurant_id}`);
+            const response = await api.get(`${this.baseUrl}/restaurant/${restaurant_id}`);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -38,7 +38,7 @@ export class MenuService {
 
     async createMenu(menu: Omit<Menu, 'id' | 'createdAt'>): Promise<Menu | null> {
         try {
-            const response = await axios.post(this.baseUrl, menu);
+            const response = await api.post(this.baseUrl, menu);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -48,7 +48,7 @@ export class MenuService {
 
     async updateMenu(id: number, menu: Partial<Menu>): Promise<Menu | null> {
         try {
-            const response = await axios.put(`${this.baseUrl}/${id}`, menu);
+            const response = await api.put(`${this.baseUrl}/${id}`, menu);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -58,7 +58,7 @@ export class MenuService {
 
     async deleteMenu(id: number): Promise<boolean> {
         try {
-            await axios.delete(`${this.baseUrl}/${id}`);
+            await api.delete(`${this.baseUrl}/${id}`);
             return true;
         } catch (error) {
             console.error(error);
@@ -68,7 +68,7 @@ export class MenuService {
 
     async updateAvailability(menuId: number, availability: boolean): Promise<Menu | null> {
         try {
-            const response = await axios.put(`${this.baseUrl}/${menuId}/availability`, { availability });
+            const response = await api.put(`${this.baseUrl}/${menuId}/availability`, { availability });
             return response.data;
         } catch (error) {
             console.error(error);

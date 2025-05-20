@@ -6,7 +6,7 @@ class SecurityService extends EventTarget {  //
     keySession: string;
     API_URL: string;
     user: User;
-    theAuthProvider:any;
+    theAuthProvider: any;
     constructor() {
         super();
 

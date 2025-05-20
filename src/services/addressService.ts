@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../interceptors/axiosInterceptor';
 import Address from '../models/address';
 
 const BASE_URL = `${import.meta.env.VITE_API_URL}/addresses`;
@@ -8,7 +8,7 @@ export class AddressService {
 
     async getAddresses(): Promise<Address[]> {
         try {
-            const response = await axios.get(this.baseUrl);
+            const response = await api.get(this.baseUrl); // Use api instead of axios
             return response.data;
         } catch (error) {
             console.error(error);
@@ -18,7 +18,7 @@ export class AddressService {
 
     async getAddressById(id: number): Promise<Address | null> {
         try {
-            const response = await axios.get(`${this.baseUrl}/${id}`);
+            const response = await api.get(`${this.baseUrl}/${id}`); // Use api
             return response.data;
         } catch (error) {
             console.error(error);
@@ -28,7 +28,7 @@ export class AddressService {
 
     async createAddress(address: Omit<Address, 'id' | 'createdAt'>): Promise<Address | null> {
         try {
-            const response = await axios.post(this.baseUrl, address);
+            const response = await api.post(this.baseUrl, address); // Use api
             return response.data;
         } catch (error) {
             console.error(error);
@@ -38,7 +38,7 @@ export class AddressService {
 
     async updateAddress(id: number, address: Partial<Address>): Promise<Address | null> {
         try {
-            const response = await axios.put(`${this.baseUrl}/${id}`, address);
+            const response = await api.put(`${this.baseUrl}/${id}`, address); // Use api
             return response.data;
         } catch (error) {
             console.error(error);
@@ -48,7 +48,7 @@ export class AddressService {
 
     async deleteAddress(id: number): Promise<boolean> {
         try {
-            await axios.delete(`${this.baseUrl}/${id}`);
+            await api.delete(`${this.baseUrl}/${id}`); // Use api
             return true;
         } catch (error) {
             console.error(error);
@@ -58,7 +58,7 @@ export class AddressService {
 
     async getAddressesByCustomer(customerId: number): Promise<Address[] | null> {
         try {
-            const response = await axios.get(`${this.baseUrl}/customer/${customerId}`);
+            const response = await api.get(`${this.baseUrl}/customer/${customerId}`); // Use api
             return response.data;
         } catch (error) {
             console.error(error);
@@ -68,4 +68,3 @@ export class AddressService {
 }
 
 export default new AddressService();
-

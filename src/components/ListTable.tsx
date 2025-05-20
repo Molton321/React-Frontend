@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import BackButton from './BackButton';
 
 interface ListTableProps {
   headers: string[];
@@ -47,30 +48,37 @@ const ListTable: React.FC<ListTableProps> = ({
         <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
           <div className="flex items-center justify-between border-b border-stroke px-6.5 py-4 dark:border-strokedark">
             <h3 className="font-medium text-black dark:text-white">Listado</h3>
-            <button
-              type="button"
-              className="flex items-center gap-2 w-fit text-gray-700 dark:text-white hover:text-primary dark:hover:text-primary font-medium"
-              onClick={() => navigate(-1)}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-              </svg>
-              Back
-            </button>
+            <BackButton
+              route={-1}
+              className="text-gray-500 dark:text-white"
+            ></BackButton>
           </div>
           <div className="flex flex-col gap-5.5 p-6.5">
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
                   <tr>
-                    {headers.map((header: any) => (
-                      <th
-                        key={header}
-                        className="px-6 py-3 font-medium text-gray-900 dark:text-white"
-                      >
-                        {header}
-                      </th>
-                    ))}
+                    {headers.map((header: any) => {
+                      // Check if any value in data for this header is an object (not null)
+                      const isObjectColumn = data.some(
+                        (item) =>
+                          typeof item[header] === 'object' &&
+                          item[header] !== null,
+                      );
+                      return (
+                        <th
+                          key={header}
+                          className={`px-6 py-3 font-medium text-gray-900 dark:text-white${isObjectColumn ? ' cursor-pointer' : ''}`}
+                          onClick={() => {
+                            if (isObjectColumn) {
+                              navigate(`/${header}`);
+                            }
+                          }}
+                        >
+                          {header}
+                        </th>
+                      );
+                    })}
                     <th scope="col" className="px-6 py-3">
                       Acciones
                     </th>
@@ -119,10 +127,17 @@ const ListTable: React.FC<ListTableProps> = ({
                         }
                         // Nested object
                         if (typeof value === 'object' && value !== null) {
+                          // Infer type from key (e.g., "motorcycle" from "motorcycleId" or "motorcycle")
+                          const type = key.replace(/Id$/, '').toLowerCase();
                           return (
                             <td
                               key={key}
                               className="px-6 py-4 font-medium text-gray-900 dark:text-white relative group"
+                              onClick={() => {
+                                if ('id' in value && value.id !== undefined) {
+                                  navigate(`/${type}/view/${value.id}`);
+                                }
+                              }}
                             >
                               <span className="underline cursor-pointer">
                                 {'id' in value && value.id !== undefined

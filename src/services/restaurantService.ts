@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../interceptors/axiosInterceptor';
 import Restaurant from '../models/restaurant';
 
 const BASE_URL = `${import.meta.env.VITE_API_URL}/restaurants`;
@@ -8,7 +8,7 @@ export class RestaurantService {
 
     async getRestaurants(): Promise<Restaurant[]> {
         try {
-            const response = await axios.get(this.baseUrl);
+            const response = await api.get(this.baseUrl);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -18,7 +18,7 @@ export class RestaurantService {
 
     async getRestaurantById(id: number): Promise<Restaurant | null> {
         try {
-            const response = await axios.get(`${this.baseUrl}/${id}`);
+            const response = await api.get(`${this.baseUrl}/${id}`);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -28,7 +28,7 @@ export class RestaurantService {
 
     async createRestaurant(restaurant: Omit<Restaurant, 'id' | 'createdAt'>): Promise<Restaurant | null> {
         try {
-            const response = await axios.post(this.baseUrl, restaurant);
+            const response = await api.post(this.baseUrl, restaurant);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -38,7 +38,7 @@ export class RestaurantService {
 
     async updateRestaurant(id: number, restaurant: Partial<Restaurant>): Promise<Restaurant | null> {
         try {
-            const response = await axios.put(`${this.baseUrl}/${id}`, restaurant);
+            const response = await api.put(`${this.baseUrl}/${id}`, restaurant);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -48,7 +48,7 @@ export class RestaurantService {
 
     async deleteRestaurant(id: number): Promise<boolean> {
         try {
-            await axios.delete(`${this.baseUrl}/${id}`);
+            await api.delete(`${this.baseUrl}/${id}`);
             return true;
         } catch (error) {
             console.error(error);

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../interceptors/axiosInterceptor';
 import Driver from '../models/driver';
 
 const BASE_URL = `${import.meta.env.VITE_API_URL}/drivers`;
@@ -8,7 +8,7 @@ export class DriverService {
 
     async getDrivers(): Promise<Driver[]> {
         try {
-            const response = await axios.get(this.baseUrl);
+            const response = await api.get(this.baseUrl);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -18,7 +18,7 @@ export class DriverService {
 
     async getDriverById(id: number): Promise<Driver | null> {
         try {
-            const response = await axios.get(`${this.baseUrl}/${id}`);
+            const response = await api.get(`${this.baseUrl}/${id}`);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -28,7 +28,7 @@ export class DriverService {
 
     async createDriver(driver: Omit<Driver, 'id' | 'createdAt'>): Promise<Driver | null> {
         try {
-            const response = await axios.post(this.baseUrl, driver);
+            const response = await api.post(this.baseUrl, driver);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -38,7 +38,7 @@ export class DriverService {
 
     async updateDriver(id: number, driver: Partial<Driver>): Promise<Driver | null> {
         try {
-            const response = await axios.put(`${this.baseUrl}/${id}`, driver);
+            const response = await api.put(`${this.baseUrl}/${id}`, driver);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -48,7 +48,7 @@ export class DriverService {
 
     async deleteDriver(id: number): Promise<boolean> {
         try {
-            await axios.delete(`${this.baseUrl}/${id}`);
+            await api.delete(`${this.baseUrl}/${id}`);
             return true;
         } catch (error) {
             console.error(error);
@@ -58,7 +58,7 @@ export class DriverService {
 
     async updateDriverStatus(id: number, status: Driver['status']): Promise<Driver | null> {
         try {
-            const response = await axios.put(`${this.baseUrl}/${id}/status`, { status });
+            const response = await api.put(`${this.baseUrl}/${id}/status`, { status });
             return response.data;
         } catch (error) {
             console.error(error);
