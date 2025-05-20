@@ -24,6 +24,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true',
   );
 
+  const models = [
+    { path: '/customer', label: 'Clientes' },
+    { path: '/driver', label: 'Repartidores' },
+    { path: '/motorcycle', label: 'Motos' },
+    { path: '/product', label: 'Productos' },
+    { path: '/restaurant', label: 'Restaurantes' },
+    { path: '/shift', label: 'Turnos' },
+    { path: '/order', label: 'Pedidos' },
+    { path: '/address', label: 'Direcciones' },
+    { path: '/issue', label: 'Incidencias' },
+    { path: '/menu', label: 'Menús' },
+    { path: '/photo', label: 'Fotos' },
+  ];
+
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -66,18 +80,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           {/* 🧭 Sidebar */}
           <aside
             ref={sidebar}
-            className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-white text-[#353343] duration-300 ease-linear dark:bg-boxdark ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-              }`}
+            className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-white text-[#353343] duration-300 ease-linear dark:bg-boxdark ${
+              sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
           >
             {/* <!-- SIDEBAR HEADER --> */}
             <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
               <div className="block flex-shrink-0 center ml-3 mt-2 w-25">
                 <NavLink to="/">
                   <img src={Logo} alt="Logo" />
-
                 </NavLink>
               </div>
-
 
               <button
                 ref={trigger}
@@ -112,64 +125,43 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   </h3>
 
                   <ul className="mb-6 flex flex-col gap-1.5">
-                    {/* <!-- Menu Item Calendar --> */}
-                    <li>
-                      <NavLink
-                        to="/productos"
-                        className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343] dark:text-white
- duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('productos') && 'bg-bodydark1 dark:bg-meta-4'
+                    {models.map((model) => (
+                      <li key={model.path}>
+                        <NavLink
+                          to={model.path}
+                          className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343] dark:text-white
+duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${
+                            pathname.includes(model.path.replace('/', '')) &&
+                            'bg-bodydark1 dark:bg-meta-4'
                           }`}
-                      >
-                        <span>Productos</span>
-                        <svg
-                          className="ml-auto w-4 h-4 text-gray-400  dark:text-gray-400  dark:group-hover:text-white"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          viewBox="0 0 24 24"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        to="/profile"
-                        className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343] dark:text-white
- duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('profile') && 'bg-bodydark1 dark:bg-meta-4'
-                          }`}
-                      >
-                        <span>Restaurantes</span>
-                        <svg
-                          className="ml-auto w-4 h-4 text-gray-400  dark:text-gray-400 dark:group-hover:text-white"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </NavLink>
-                    </li>
-
-                    {/* <!-- Menu Item Restaurants --> */}
+                          <span>{model.label}</span>
+                          <svg
+                            className="ml-auto w-4 h-4 text-gray-400  dark:text-gray-400  dark:group-hover:text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </NavLink>
+                      </li>
+                    ))}
 
                     {/* <!-- Menu Item Map --> */}
                     <li>
                       <NavLink
                         to="/deliveryMap"
                         className={`group relative flex items-center rounded-sm py-2 px-4 font-bold  text-[#353343] dark:text-white
-duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('deliveryMap') &&
+duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${
+                          pathname.includes('deliveryMap') &&
                           'dark:bg-meta-4 dark:hover:bg-meta-4'
-                          }`}
+                        }`}
                       >
                         <span>¿Dónde va mi pedido?</span>
                         <svg
@@ -194,9 +186,10 @@ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.incl
                       <NavLink
                         to="/tables"
                         className={`group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343] dark:text-white
-duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('tables') &&
+duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${
+                          pathname.includes('tables') &&
                           'bg-bodydark1 dark:bg-bodydark1'
-                          }`}
+                        }`}
                       >
                         <span>¿Cómo va mi negocio?</span>
                         <svg
@@ -240,16 +233,14 @@ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.incl
                       </li>
                     </div>
 
-
-
-
                     {/* <!-- Menu Item Settings --> */}
                     <li>
                       <NavLink
                         to="/settings"
-                        className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-bold text-[#353343] duration-300 ease-in-out dark:text-white hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.includes('settings') &&
+                        className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-bold text-[#353343] duration-300 ease-in-out dark:text-white hover:bg-bodydark1 dark:hover:bg-meta-4 ${
+                          pathname.includes('settings') &&
                           'bg-bodydark1 dark:bg-meta-4'
-                          }`}
+                        }`}
                       >
                         <svg
                           className="fill-current dark:text-white"

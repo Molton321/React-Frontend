@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:5000'); // Asegúrate de que esta URL coincida con tu backend
+const socket = io(import.meta.env.VITE_BACKEND_URL); // Asegúrate de que esta URL coincida con tu backend
 
 const DropdownNotification = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -12,7 +12,7 @@ const DropdownNotification = () => {
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
-  const audio = useRef(new Audio('src/sounds/notificationSound.mp3')); // 🔔 asegúrate de que exista esta ruta
+  const audio = useRef(new Audio('/sounds/notificationSound.mp3')); // 🔔 asegúrate de que exista esta ruta
 
   const playNotificationSound = () => {
     audio.current.play().catch((e) => {
@@ -78,7 +78,6 @@ const DropdownNotification = () => {
         <span className="absolute -top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-meta-1">
           <span className="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-meta-1 opacity-75"></span>
         </span>
-
         🔔
       </Link>
 
