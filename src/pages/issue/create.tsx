@@ -3,6 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Issue from '../../models/issue';
 import issueService from '../../services/issueService';
+import { useNavigate } from 'react-router-dom';
 
 
 const issueModel: Omit<Issue, 'id' | 'createdAt'> = {
@@ -22,10 +23,13 @@ const issueFormSchema = Yup.object({
 });
 
 const CreateIssuePage: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: typeof issueModel) => {
     try {
       await issueService.createIssue(values as Omit<Issue, 'id' | 'createdAt'>);
       alert('Issue created successfully!');
+      navigate('/issue');
     } catch (error) {
       alert('Failed to create issue.');
     }
@@ -33,7 +37,6 @@ const CreateIssuePage: React.FC = () => {
 
   return (
     <div>
-      <h1>Create Issue</h1>
       <UniversalForm
         model={issueModel}
         validationSchema={issueFormSchema}
@@ -41,6 +44,7 @@ const CreateIssuePage: React.FC = () => {
         submitLabel="Create Issue"
         issuesOptions={['Accident', 'Breakdown', 'Maintenance']}
         statusOptions={['open', 'in_progress', 'resolved']}
+        formTitle="Create Issue"
       />
     </div>
   );

@@ -3,6 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import driverService from '../../services/driverService';
 import Driver from '../../models/driver';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -27,11 +28,13 @@ const driverFormSchema = Yup.object({
 });
 
 const CreateDriverPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: Omit<Driver, 'id' | 'createdAt'>) => {
     // Replace with your API call
     try {
       await driverService.createDriver(values);
-      alert('Driver created successfully!');
+      navigate('/driver');
     } catch (error) {
       alert('Failed to create driver.');
     }
@@ -39,13 +42,13 @@ const CreateDriverPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Create Driver</h1>
       <UniversalForm
         model={driverModel}
         validationSchema={driverFormSchema}
         onSubmit={handleSubmit}
         submitLabel="Create Driver"
         statusOptions={['available', 'busy', 'offline']}
+        formTitle="Create Driver"
       />
     </div>
   );

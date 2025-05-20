@@ -3,7 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Order from '../../models/order';
 import orderService from '../../services/orderService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const orderFormSchema = Yup.object({
     customer_id: Yup.number().required('El cliente es obligatorio'),
@@ -16,6 +16,7 @@ const orderFormSchema = Yup.object({
 
 const UpdateOrderPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const [orderModel, setOrderModel] = useState<Order | null>(null);
 
     useEffect(() => {
@@ -29,7 +30,7 @@ const UpdateOrderPage: React.FC = () => {
     const handleSubmit = async (values: Order) => {
         try {
             await orderService.updateOrder(values.id, values);
-            alert('Order updated successfully!');
+            navigate('/order');
         } catch (error) {
             alert('Failed to update order.');
         }
@@ -39,13 +40,13 @@ const UpdateOrderPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Update Order {id}</h1>
             <UniversalForm
                 model={orderModel}
                 validationSchema={orderFormSchema}
                 onSubmit={handleSubmit}
                 submitLabel="Update Order"
                 statusOptions={['pending', 'confirmed', 'in_progress', 'delivered', 'cancelled']}
+                formTitle={`Update Order ${id}`}
             />
         </div>
     );

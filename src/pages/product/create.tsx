@@ -3,6 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Product from '../../models/product';
 import productService from '../../services/productService';
+import { useNavigate } from 'react-router-dom';
 
 const productModel: Product = {
   id: 0,
@@ -20,24 +21,25 @@ const productFormSchema = Yup.object({
 });
 
 const CreateProductPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: Product ) => {
     try {
       await productService.createProduct(values);
-      alert('Product created successfully!');
+      navigate('/product');
     } catch (error) {
-      console.error('Error creating product:', error);
       alert('Failed to create product.');
     }
   };
 
   return (
     <div>
-      <h1>Create Product</h1>
       <UniversalForm
         model={productModel}
         validationSchema={productFormSchema}
         onSubmit={handleSubmit}
         submitLabel="Create Product"
+        formTitle="Create Product"
       />
     </div>
   );

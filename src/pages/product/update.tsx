@@ -1,10 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Product from '../../models/product';
 import productService from '../../services/productService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const productFormSchema = Yup.object({
     name: Yup.string().required('El nombre es obligatorio'),
@@ -15,6 +14,7 @@ const productFormSchema = Yup.object({
 
 const UpdateProductPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const [productModel, setProductModel] = useState<Product | null>(null);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const UpdateProductPage: React.FC = () => {
     const handleSubmit = async (values: Product) => {
         try {
             await productService.updateProduct(values.id, values);
-            alert('Product updated successfully!');
+            navigate('/product');
         } catch (error) {
             alert('Failed to update product.');
         }
@@ -38,12 +38,12 @@ const UpdateProductPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Update Product {id}</h1>
             <UniversalForm
                 model={productModel}
                 validationSchema={productFormSchema}
                 onSubmit={handleSubmit}
                 submitLabel="Update Product"
+                formTitle={`Update Product ${id}`}
             />
         </div>
     );

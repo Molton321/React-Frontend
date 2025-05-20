@@ -3,7 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Menu from '../../models/menu';
 import menuService from '../../services/menuService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const menuFormSchema = Yup.object({
     restaurant_id: Yup.number().required('El restaurante es obligatorio'),
@@ -14,6 +14,7 @@ const menuFormSchema = Yup.object({
 
 const UpdateMenuPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const [menuModel, setMenuModel] = useState<Menu | null>(null);
 
     useEffect(() => {
@@ -27,8 +28,7 @@ const UpdateMenuPage: React.FC = () => {
     const handleSubmit = async (values: Menu) => {
         try {
             await menuService.updateMenu(values.id, values);
-            console.log(values)
-            alert('Menu updated successfully!');
+            navigate('/menu');
         } catch (error) {
             alert('Failed to update menu.');
         }
@@ -38,12 +38,12 @@ const UpdateMenuPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Update Menu {id}</h1>
             <UniversalForm
                 model={menuModel}
                 validationSchema={menuFormSchema}
                 onSubmit={handleSubmit}
                 submitLabel="Update Menu"
+                formTitle={`Update Menu ${id}`}
             />
         </div>
     );

@@ -3,7 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Issue from '../../models/issue';
 import issueService from '../../services/issueService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const issueFormSchema = Yup.object({
     motorcycle_id: Yup.number().required('La moto es obligatoria'),
@@ -15,6 +15,7 @@ const issueFormSchema = Yup.object({
 
 const UpdateIssuePage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const [issueModel, setIssueModel] = useState<Issue | null>(null);
 
     useEffect(() => {
@@ -28,8 +29,7 @@ const UpdateIssuePage: React.FC = () => {
     const handleSubmit = async (values: Issue) => {
         try {
             await issueService.updateIssue(values.id, values);
-            console.log(values);
-            alert('Issue updated successfully!');
+            navigate('/issue');
         } catch (error) {
             alert('Failed to update issue.');
         }
@@ -39,7 +39,6 @@ const UpdateIssuePage: React.FC = () => {
 
     return (
         <div>
-            <h1>Update Issue {id}</h1>
             <UniversalForm
                 model={issueModel}
                 validationSchema={issueFormSchema}
@@ -47,6 +46,7 @@ const UpdateIssuePage: React.FC = () => {
                 submitLabel="Update Issue"
                 issuesOptions={['Accident', 'Breakdown', 'Maintenance']}
                 statusOptions={['open', 'in_progress', 'resolved']}
+                formTitle={`Update Issue ${id}`}
             />
         </div>
     );

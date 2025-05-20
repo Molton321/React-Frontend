@@ -3,6 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Customer from '../../models/customer';
 import customerService from '../../services/customerService';
+import { useNavigate } from 'react-router-dom';
 
 const customerModel: Omit<Customer, 'id' | 'createdAt'> = {
   name: '',
@@ -17,10 +18,12 @@ const customerFormSchema = Yup.object({
 });
 
 const CreateCustomerPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: typeof customerModel) => {
     try {
       await customerService.createCustomer(values);
-      alert('Customer created successfully!');
+      navigate('/customer');
     } catch (error) {
       alert('Failed to create customer.');
     }
@@ -28,12 +31,12 @@ const CreateCustomerPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Create Customer</h1>
       <UniversalForm
         model={customerModel}
         validationSchema={customerFormSchema}
         onSubmit={handleSubmit}
         submitLabel="Create Customer"
+        formTitle="Create Customer"
       />
     </div>
   );

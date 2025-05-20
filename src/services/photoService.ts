@@ -71,7 +71,7 @@ export class PhotoService {
         }
     }
 
-    async uploadPhoto(issue_id: number, photo: FormData, options?: {
+    async uploadPhotoInfo(issue_id: number, photo: FormData, options?: {
         caption?: string;
     }): Promise<Photo | null> {
         try {

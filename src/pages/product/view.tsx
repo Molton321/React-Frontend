@@ -28,13 +28,13 @@ const ViewProductPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Ver Producto {id}</h1>
             <UniversalForm
                 model={productModel}
                 validationSchema={productFormSchema}
                 onSubmit={() => {}}
                 submitLabel=""
                 readOnly={true}
+                formTitle={`Ver Producto ${id}`}
             />
         </div>
     );

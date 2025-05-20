@@ -3,6 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Motorcycle from '../../models/motorcycle';
 import motorcycleService from '../../services/motorcycleService';
+import { useNavigate } from 'react-router-dom';
 
 const motorcycleModel: Omit<Motorcycle, 'id' | 'createdAt'> = {
   licensePlate: '',
@@ -19,10 +20,12 @@ const motorcycleFormSchema = Yup.object({
 });
 
 const CreateMotorcyclePage: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: typeof motorcycleModel) => {
     try {
       await motorcycleService.createMotorcycle(values);
-      alert('Motorcycle created successfully!');
+      navigate('/motorcycle');
     } catch (error) {
       alert('Failed to create motorcycle.');
     }
@@ -30,12 +33,12 @@ const CreateMotorcyclePage: React.FC = () => {
 
   return (
     <div>
-      <h1>Create Motorcycle</h1>
       <UniversalForm
         model={motorcycleModel}
         validationSchema={motorcycleFormSchema}
         onSubmit={handleSubmit}
         submitLabel="Create Motorcycle"
+        formTitle="Create Motorcycle"
       />
     </div>
   );

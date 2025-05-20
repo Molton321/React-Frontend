@@ -3,6 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Order from '../../models/order';
 import orderService from '../../services/orderService';
+import { useNavigate } from 'react-router-dom';
 
 const orderModel : Omit<Order,"id"|"createdAt"> = {
   customer_id: 0,
@@ -23,10 +24,12 @@ const orderFormSchema = Yup.object({
 });
 
 const CreateOrderPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: Omit<Order,"id"|"createdAt">) => {
     try {
       await orderService.createOrder(values)
-      alert('Order created successfully!');
+      navigate('/order');
     } catch (error) {
       alert('Failed to create order.');
     }
@@ -34,13 +37,13 @@ const CreateOrderPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Create Order</h1>
       <UniversalForm
         model={orderModel}
         validationSchema={orderFormSchema}
         onSubmit={handleSubmit}
         submitLabel="Create Order"
         statusOptions={['pending','confirmed', 'in_progress', 'delivered', 'cancelled']}
+        formTitle="Create Order"
       />
     </div>
   );

@@ -3,7 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Shift from '../../models/shift';
 import shiftService from '../../services/shiftService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const shiftFormSchema = Yup.object({
     driver_id: Yup.number().required('El conductor es obligatorio'),
@@ -15,6 +15,7 @@ const shiftFormSchema = Yup.object({
 
 const UpdateShiftPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const [shiftModel, setShiftModel] = useState<Shift | null>(null);
 
     useEffect(() => {
@@ -28,7 +29,7 @@ const UpdateShiftPage: React.FC = () => {
     const handleSubmit = async (values: Shift) => {
         try {
             await shiftService.updateShift(values.id, values);
-            alert('Shift updated successfully!');
+            navigate('/shift');
         } catch (error) {
             alert('Failed to update shift.');
         }
@@ -38,12 +39,12 @@ const UpdateShiftPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Update Shift {id}</h1>
             <UniversalForm
                 model={shiftModel}
                 validationSchema={shiftFormSchema}
                 onSubmit={handleSubmit}
                 submitLabel="Update Shift"
+                formTitle={`Update Shift ${id}`}
             />
         </div>
     );

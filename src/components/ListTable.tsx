@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ListTableProps {
   headers: string[];
@@ -13,6 +14,8 @@ const ListTable: React.FC<ListTableProps> = ({
   actions,
   onAccion,
 }) => {
+  const navigate = useNavigate();
+
   const renderTooltip = (obj: any) => (
     <div className="p-2 max-w-70 text-xs text-white bg-graydark rounded shadow-lg z-50">
       {Object.entries(obj)
@@ -42,8 +45,18 @@ const ListTable: React.FC<ListTableProps> = ({
     <div className="grid grid-cols-1 gap-9">
       <div className="flex flex-col gap-9">
         <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-          <div className="border-b border-stroke px-6.5 py-4 dark:border-strokedark">
+          <div className="flex items-center justify-between border-b border-stroke px-6.5 py-4 dark:border-strokedark">
             <h3 className="font-medium text-black dark:text-white">Listado</h3>
+            <button
+              type="button"
+              className="flex items-center gap-2 w-fit text-gray-700 dark:text-white hover:text-primary dark:hover:text-primary font-medium"
+              onClick={() => navigate(-1)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              </svg>
+              Back
+            </button>
           </div>
           <div className="flex flex-col gap-5.5 p-6.5">
             <div className="overflow-x-auto">

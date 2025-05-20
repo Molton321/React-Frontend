@@ -3,6 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Address from '../../models/address';
 import addressService from '../../services/addressService';
+import { useNavigate } from 'react-router-dom';
 
 const addressModel: Omit<Address, 'id' | 'createdAt'> = {
   order_id: 0,
@@ -23,10 +24,12 @@ const addressFormSchema = Yup.object({
 });
 
 const CreateAddressPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: typeof addressModel) => {
     try {
       await addressService.createAddress(values);
-      alert('Address created successfully!');
+      navigate('/address/list');
     } catch (error) {
       alert('Failed to create address.');
     }
@@ -34,15 +37,14 @@ const CreateAddressPage: React.FC = () => {
 
   // Aquí puedes agregar la lógica para enviar los datos a tu API o backend
 
-
   return (
     <div>
-      <h1>Create Address</h1>
       <UniversalForm
         model={addressModel}
         validationSchema={addressFormSchema}
         onSubmit={handleSubmit}
         submitLabel="Create Address"
+        formTitle="Create Address"
       />
     </div>
   );

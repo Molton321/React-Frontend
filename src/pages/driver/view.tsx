@@ -29,7 +29,6 @@ const ViewDriverPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Ver Conductor {id}</h1>
             <UniversalForm
                 model={driverModel}
                 validationSchema={driverFormSchema}
@@ -37,6 +36,7 @@ const ViewDriverPage: React.FC = () => {
                 submitLabel=""
                 readOnly={true}
                 statusOptions={['available', 'busy', 'offline']}
+                formTitle={`Ver Conductor ${id}`}
             />
         </div>
     );

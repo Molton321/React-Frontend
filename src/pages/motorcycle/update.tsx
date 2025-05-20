@@ -3,7 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Motorcycle from '../../models/motorcycle';
 import motorcycleService from '../../services/motorcycleService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const motorcycleFormSchema = Yup.object({
     licensePlate: Yup.string().required('La placa es obligatoria'),
@@ -14,6 +14,7 @@ const motorcycleFormSchema = Yup.object({
 
 const UpdateMotorcyclePage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const [motorcycleModel, setMotorcycleModel] = useState<Motorcycle | null>(null);
 
     useEffect(() => {
@@ -27,7 +28,7 @@ const UpdateMotorcyclePage: React.FC = () => {
     const handleSubmit = async (values: Motorcycle) => {
         try {
             await motorcycleService.updateMotorcycle(values.id, values);
-            alert('Motorcycle updated successfully!');
+            navigate('/motorcycle');
         } catch (error) {
             alert('Failed to update motorcycle.');
         }
@@ -37,12 +38,12 @@ const UpdateMotorcyclePage: React.FC = () => {
 
     return (
         <div>
-            <h1>Update Motorcycle {id}</h1>
             <UniversalForm
                 model={motorcycleModel}
                 validationSchema={motorcycleFormSchema}
                 onSubmit={handleSubmit}
                 submitLabel="Update Motorcycle"
+                formTitle={`Update Motorcycle ${id}`}
             />
         </div>
     );

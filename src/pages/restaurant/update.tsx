@@ -1,10 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Restaurant from '../../models/restaurant';
 import restaurantService from '../../services/restaurantService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const restaurantFormSchema = Yup.object({
     name: Yup.string().required('El nombre es obligatorio'),
@@ -16,6 +15,7 @@ const restaurantFormSchema = Yup.object({
 
 const UpdateRestaurantPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const [restaurantModel, setRestaurantModel] = useState<Restaurant | null>(null);
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const UpdateRestaurantPage: React.FC = () => {
     const handleSubmit = async (values: Restaurant) => {
         try {
             await restaurantService.updateRestaurant(values.id, values);
-            alert('Restaurant updated successfully!');
+            navigate('/restaurant');
         } catch (error) {
             alert('Failed to update restaurant.');
         }
@@ -39,12 +39,12 @@ const UpdateRestaurantPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Update Restaurant {id}</h1>
             <UniversalForm
                 model={restaurantModel}
                 validationSchema={restaurantFormSchema}
                 onSubmit={handleSubmit}
                 submitLabel="Update Restaurant"
+                formTitle={`Update Restaurant ${id}`}
             />
         </div>
     );

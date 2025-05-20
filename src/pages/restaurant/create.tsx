@@ -3,6 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Restaurant from '../../models/restaurant';
 import restaurantService from '../../services/restaurantService';
+import { useNavigate } from 'react-router-dom';
 
 const restaurantModel: Omit<Restaurant, 'id' | 'createdAt'> = {
   name: '',
@@ -21,10 +22,12 @@ const restaurantFormSchema = Yup.object({
 });
 
 const CreateRestaurantPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: Omit<Restaurant, 'id'|'createdAt'>) => {
     try {
       await restaurantService.createRestaurant(values);
-      alert('Restaurant created successfully!');
+      navigate('/restaurant');
     } catch (error) {
       alert('Failed to create restaurant.');
     }
@@ -32,12 +35,12 @@ const CreateRestaurantPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Create Restaurant</h1>
       <UniversalForm
         model={restaurantModel}
         validationSchema={restaurantFormSchema}
         onSubmit={handleSubmit}
         submitLabel="Create Restaurant"
+        formTitle="Create Restaurant"
       />
     </div>
   );

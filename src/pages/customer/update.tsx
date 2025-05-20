@@ -1,10 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Customer from '../../models/customer';
 import customerService from '../../services/customerService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const customerFormSchema = Yup.object({
     name: Yup.string().required('El nombre es obligatorio'),
@@ -14,6 +13,7 @@ const customerFormSchema = Yup.object({
 
 const UpdateCustomerPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const [customerModel, setCustomerModel] = useState<Customer | null>(null);
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const UpdateCustomerPage: React.FC = () => {
     const handleSubmit = async (values: Customer) => {
         try {
             await customerService.updateCustomer(values.id, values);
-            alert('Customer updated successfully!');
+            navigate('/customer');
         } catch (error) {
             alert('Failed to update customer.');
         }
@@ -37,12 +37,12 @@ const UpdateCustomerPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Update Customer {id}</h1>
             <UniversalForm
                 model={customerModel}
                 validationSchema={customerFormSchema}
                 onSubmit={handleSubmit}
                 submitLabel="Update Customer"
+                formTitle={`Update Customer ${id}`}
             />
         </div>
     );

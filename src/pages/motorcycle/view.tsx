@@ -28,7 +28,6 @@ const ViewMotorcyclePage: React.FC = () => {
 
     return (
         <div>
-            <h1>Ver Motocicleta {id}</h1>
             <UniversalForm
                 model={motorcycleModel}
                 validationSchema={motorcycleFormSchema}
@@ -36,6 +35,7 @@ const ViewMotorcyclePage: React.FC = () => {
                 submitLabel=""
                 readOnly={true}
                 statusOptions={['active', 'maintenance', 'retired']}
+                formTitle={`Ver Motocicleta ${id}`}
             />
         </div>
     );

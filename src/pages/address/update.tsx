@@ -3,11 +3,8 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Address from '../../models/address';
 import addressService from '../../services/addressService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
-
-
 
 const addressFormSchema = Yup.object({
     order_id: Yup.string().required('El ID de la orden es obligatorio'),
@@ -20,6 +17,7 @@ const addressFormSchema = Yup.object({
 
 const UpdateAddressPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const [addressModel, setAddressModel] = useState<Address | null>(null);
 
     useEffect(() => {
@@ -33,7 +31,7 @@ const UpdateAddressPage: React.FC = () => {
     const handleSubmit = async (values: Address) => {
         try {
             await addressService.updateAddress(values.id, values);
-            alert('Address updated successfully!');
+            navigate('/address');
         } catch (error) {
             alert('Failed to update address.');
         }
@@ -41,15 +39,14 @@ const UpdateAddressPage: React.FC = () => {
 
     if (!addressModel) return <div>Cargando...</div>;
 
-
     return (
         <div>
-            <h1>Update Address {id}</h1>
             <UniversalForm
                 model={addressModel}
                 validationSchema={addressFormSchema}
                 onSubmit={handleSubmit}
-                submitLabel= "Update Address"
+                submitLabel="Update Address"
+                formTitle={`Update Address ${id}`}
             />
         </div>
     );

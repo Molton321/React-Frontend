@@ -28,13 +28,13 @@ const ViewMenuPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Ver Menú {id}</h1>
             <UniversalForm
                 model={menuModel}
                 validationSchema={menuFormSchema}
                 onSubmit={() => {}}
                 submitLabel=""
                 readOnly={true}
+                formTitle={`Ver Menú ${id}`}
             />
         </div>
     );

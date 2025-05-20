@@ -29,7 +29,6 @@ const ViewShiftPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Ver Turno {id}</h1>
             <UniversalForm
                 model={shiftModel}
                 validationSchema={shiftFormSchema}
@@ -37,6 +36,7 @@ const ViewShiftPage: React.FC = () => {
                 submitLabel=""
                 readOnly={true}
                 statusOptions={['scheduled', 'active', 'completed', 'cancelled']}
+                formTitle={`Ver Turno ${id}`}
             />
         </div>
     );

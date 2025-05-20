@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Photo from '../models/photo';
 import ReferenceSelect from './ReferenceSelect';
+import { useNavigate } from 'react-router-dom';
 
 interface PhotoFormProps {
   initialValues?: Partial<Omit<Photo, 'id' | 'createdAt'>>;
@@ -34,6 +35,7 @@ const PhotoForm: React.FC<PhotoFormProps> = ({
   showFileInput = true,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate(); // Hook para redirección
 
   return (
     <Formik
@@ -59,6 +61,7 @@ const PhotoForm: React.FC<PhotoFormProps> = ({
             await onSubmit(payload);
           }
           resetForm();
+          navigate('/photos'); // Redirige a la lista de fotos
         } finally {
           setSubmitting(false);
         }

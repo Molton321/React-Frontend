@@ -14,8 +14,8 @@ const TestComponent = lazy(() => import('../components/TestComponent'));
 
 // Users
 const ListUsers = lazy(() => import('../pages/user/list'));
-const CreatetUser = lazy(() => import('../pages/user/create'));
-const UpdatetUser = lazy(() => import('../pages/user/update'));
+// const CreatetUser = lazy(() => import('../pages/user/create'));
+// const UpdatetUser = lazy(() => import('../pages/user/update'));
 const ViewUser = lazy(() => import('../pages/user/view'));
 
 // Address
@@ -84,12 +84,6 @@ const CreateShift = lazy(() => import('../pages/shift/create'));
 const UpdateShift = lazy(() => import('../pages/shift/update'));
 const ViewShift = lazy(() => import('../pages/shift/view'));
 
-// User (already present, but for consistency)
-const ListUser = lazy(() => import('../pages/user/list'));
-const CreateUser = lazy(() => import('../pages/user/create'));
-const UpdateUser = lazy(() => import('../pages/user/update'));
-
-
 
 const coreRoutes = [
   {
@@ -142,16 +136,16 @@ const coreRoutes = [
     title: 'Users',
     component: ListUsers,
   },
-  {
-    path: '/users/create',
-    title: 'Create User',
-    component: CreatetUser,
-  },
-  {
-    path: '/users/update/:id',
-    title: 'Update User',
-    component: UpdatetUser,
-  },
+  // {
+  //   path: '/users/create',
+  //   title: 'Create User',
+  //   component: CreatetUser,
+  // },
+  // {
+  //   path: '/users/update/:id',
+  //   title: 'Update User',
+  //   component: UpdatetUser,
+  // },
   {
     path: '/users/view/:id',
     title: 'View User',
@@ -404,22 +398,22 @@ const coreRoutes = [
     component: ViewShift,
   },
 
-  // User
-  {
-    path: '/user',
-    title: 'User',
-    component: ListUser,
-  },
-  {
-    path: '/user/create',
-    title: 'Create User',
-    component: CreateUser,
-  },
-  {
-    path: '/user/update/:id',
-    title: 'Update User',
-    component: UpdateUser,
-  },
+  // // User
+  // {
+  //   path: '/user',
+  //   title: 'User',
+  //   component: ListUser,
+  // },
+  // {
+  //   path: '/user/create',
+  //   title: 'Create User',
+  //   component: CreateUser,
+  // },
+  // {
+  //   path: '/user/update/:id',
+  //   title: 'Update User',
+  //   component: UpdateUser,
+  // },
 ];
 
 const routes = [...coreRoutes];

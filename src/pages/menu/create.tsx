@@ -3,6 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Menu from '../../models/menu';
 import menuService from '../../services/menuService';
+import { useNavigate } from 'react-router-dom';
 
 const menuModel: Omit<Menu, 'id' | 'createdAt'> = {
   restaurant_id: 0,
@@ -19,10 +20,12 @@ const menuFormSchema = Yup.object({
 });
 
 const CreateMenuPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: typeof menuModel) => {
     try {
       await menuService.createMenu(values);
-      alert('Menu created successfully!');
+      navigate('/menu');
     } catch (error) {
       alert('Failed to create menu.');
     }
@@ -30,12 +33,12 @@ const CreateMenuPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Create Menu</h1>
       <UniversalForm
         model={menuModel}
         validationSchema={menuFormSchema}
         onSubmit={handleSubmit}
         submitLabel="Create Menu"
+        formTitle="Create Menu"
       />
     </div>
   );

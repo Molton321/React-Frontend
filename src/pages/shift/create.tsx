@@ -3,6 +3,7 @@ import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Shift from '../../models/shift';
 import shiftService from '../../services/shiftService';
+import { useNavigate } from 'react-router-dom';
 
 
 const shiftModel: Omit<Shift, 'id' | 'createdAt'> = {
@@ -22,10 +23,12 @@ const shiftFormSchema = Yup.object({
 });
 
 const CreateShiftPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: typeof shiftModel) => {
     try {
       await shiftService.createShift(values as Omit<Shift, 'id' | 'createdAt'>);
-      alert('Shift created successfully!');
+      navigate('/shift');
     } catch (error) {
       alert('Failed to create shift.');
     }
@@ -33,13 +36,13 @@ const CreateShiftPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Create Shift</h1>
       <UniversalForm
         model={shiftModel}
         validationSchema={shiftFormSchema}
         onSubmit={handleSubmit}
         submitLabel="Create Shift"
         statusOptions={['scheduled', 'in_progress', 'completed', 'cancelled']}
+        formTitle="Create Shift"
       />
     </div>
   );

@@ -30,13 +30,13 @@ const ViewAddressPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Ver Dirección {id}</h1>
             <UniversalForm
                 model={addressModel}
                 validationSchema={addressFormSchema}
                 onSubmit={() => {}}
                 submitLabel=""
                 readOnly={true}
+                formTitle={`Ver Dirección ${id}`}
             />
         </div>
     );

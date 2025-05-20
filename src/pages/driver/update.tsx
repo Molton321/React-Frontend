@@ -1,10 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import UniversalForm from '../../components/UniversalForm';
 import * as Yup from 'yup';
 import Driver from '../../models/driver';
 import driverService from '../../services/driverService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const driverFormSchema = Yup.object({
     name: Yup.string().required('El nombre es obligatorio'),
@@ -16,6 +15,7 @@ const driverFormSchema = Yup.object({
 
 const UpdateDriverPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const [driverModel, setDriverModel] = useState<Driver | null>(null);
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const UpdateDriverPage: React.FC = () => {
     const handleSubmit = async (values: Driver) => {
         try {
             await driverService.updateDriver(values.id, values);
-            alert('Driver updated successfully!');
+            navigate('/driver');
         } catch (error) {
             alert('Failed to update driver.');
         }
@@ -39,13 +39,13 @@ const UpdateDriverPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Update Driver {id}</h1>
             <UniversalForm
                 model={driverModel}
                 validationSchema={driverFormSchema}
                 onSubmit={handleSubmit}
                 submitLabel="Update Driver"
                 statusOptions={['available', 'busy', 'offline']}
+                formTitle={`Update Driver ${id}`}
             />
         </div>
     );

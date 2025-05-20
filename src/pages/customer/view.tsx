@@ -27,13 +27,13 @@ const ViewCustomerPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Ver Cliente {id}</h1>
             <UniversalForm
                 model={customerModel}
                 validationSchema={customerFormSchema}
                 onSubmit={() => {}}
                 submitLabel=""
                 readOnly={true}
+                formTitle={`Ver Cliente ${id}`}
             />
         </div>
     );

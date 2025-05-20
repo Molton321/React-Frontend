@@ -33,13 +33,13 @@ const ViewUserPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Ver Usuario {id}</h1>
             <UniversalForm
                 model={userModel}
                 validationSchema={userFormSchema}
                 onSubmit={() => {}}
                 submitLabel=""
                 readOnly={true}
+                formTitle={`Ver Usuario ${id}`}
             />
         </div>
     );

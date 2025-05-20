@@ -30,7 +30,6 @@ const ViewOrderPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Ver Orden {id}</h1>
             <UniversalForm
                 model={orderModel}
                 validationSchema={orderFormSchema}
@@ -38,6 +37,7 @@ const ViewOrderPage: React.FC = () => {
                 submitLabel=""
                 readOnly={true}
                 statusOptions={['pending', 'confirmed', 'in_progress', 'delivered', 'cancelled']}
+                formTitle={`Ver Orden ${id}`}
             />
         </div>
     );

@@ -29,7 +29,6 @@ const ViewIssuePage: React.FC = () => {
 
     return (
         <div>
-            <h1>Ver Issue {id}</h1>
             <UniversalForm
                 model={issueModel}
                 validationSchema={issueFormSchema}
@@ -38,6 +37,7 @@ const ViewIssuePage: React.FC = () => {
                 readOnly={true}
                 issuesOptions={['accident', 'breakdown', 'maintenance']}
                 statusOptions={['open', 'in_progress', 'resolved', 'closed']}
+                formTitle={`Ver Issue ${id}`}
             />
         </div>
     );

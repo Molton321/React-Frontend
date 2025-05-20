@@ -29,13 +29,13 @@ const ViewRestaurantPage: React.FC = () => {
 
     return (
         <div>
-            <h1>Ver Restaurante {id}</h1>
             <UniversalForm
                 model={restaurantModel}
                 validationSchema={restaurantFormSchema}
                 onSubmit={() => {}}
                 submitLabel=""
                 readOnly={true}
+                formTitle={`Ver Restaurante ${id}`}
             />
         </div>
     );
