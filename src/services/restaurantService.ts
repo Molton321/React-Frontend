@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Restaurant from '../models/restaurant';
 
-const BASE_URL = '/restaurants';
+const BASE_URL = `${import.meta.env.VITE_API_URL}/restaurants`;
 
 export class RestaurantService {
     private baseUrl = BASE_URL;

@@ -60,6 +60,16 @@ export class OrderService {
             return null;
         }
     }
+
+    async deleteOrder(id: number): Promise<boolean> {
+        try {
+            await axios.delete(`${this.baseUrl}/${id}`);
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
 }
 
 export default new OrderService();

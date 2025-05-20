@@ -1,7 +1,7 @@
 interface Product {
     id: number;
     name: string;
-    description?: Text;
+    description?: string;
     price: number;
     category?: string;    
     createdAt: Date;
