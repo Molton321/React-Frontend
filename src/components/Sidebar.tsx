@@ -235,7 +235,7 @@ duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4 ${pathname.incl
                             (isActive ? ' ring-2 ring-emerald-300' : '')
                           }
                         >
-                          <p className="text-white font-bold">Ingreso</p>
+                          <p className="text-white font-bold">Botón xd</p>
                         </NavLink>
                       </li>
                     </div>
