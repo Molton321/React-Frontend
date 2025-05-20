@@ -16,8 +16,22 @@ const DropdownUser = () => {
   const logOut = () => {
     securityService.logout();
     console.log('Logout');
-    
+
     navigate('/auth/signIn');
+  };
+
+  const getPicture = () => {
+    localStorage.getItem('user');
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      try {
+        const userObj = JSON.parse(userString);
+        return userObj.picture;
+      } catch {
+        return UserOne;
+      }
+    }
+    return UserOne;
   };
 
   // close on click outside
@@ -61,7 +75,13 @@ const DropdownUser = () => {
         </span>
 
         <span className="h-10 w-10 rounded-full">
-          <img src={UserOne} alt="User" />
+          <img
+            src={getPicture()}
+            className="rounded-xl"
+            alt="User"
+            referrerPolicy="no-referrer"
+            onError={(e) => (e.currentTarget.src = UserOne)}
+          />
         </span>
 
         <svg
