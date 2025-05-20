@@ -32,14 +32,14 @@ const MapPage = () => {
             <h4 className="font-semibold text-[#353343] dark:text-white">
               Estado
             </h4>
-            <p className="mt-1 text-green-600 font-medium">🟢 En camino</p>
+            <p className="mt-1 text-green-600 font-medium dark:text-white">🟢 En camino</p>
           </div>
 
           <div className="rounded-lg bg-white p-4 shadow-md dark:bg-boxdark">
             <h4 className="font-semibold text-[#353343] dark:text-white">
               Conductor
             </h4>
-            <p className="mt-1 text-[#353343] dark:text-gray-200">
+            <p className="mt-1 text-[#353343] dark:text-white">
               Carlos Ramírez
             </p>
           </div>
@@ -48,7 +48,7 @@ const MapPage = () => {
             <h4 className="font-semibold text-[#353343] dark:text-white">
               Tiempo estimado
             </h4>
-            <p className="mt-1 text-[#353343] dark:text-gray-200">
+            <p className="mt-1 text-[#353343] dark:text-white">
               12 minutos
             </p>
           </div>

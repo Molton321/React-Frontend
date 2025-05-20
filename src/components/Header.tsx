@@ -1,22 +1,23 @@
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../images/logo/logo-icon.svg';
+import { useState } from 'react';
+import Logo from '../assets/DELIGO.png';
 import DarkModeSwitcher from './DarkModeSwitcher';
-import DropdownMessage from './DropdownMessage';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
-import Navbar from './NavBar';
+import CartSidebar from './ShoppingCart/CartSidebar';
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
-  
-}
-) => {
+}) => {
   const navigate = useNavigate();
   const storedUser = localStorage.getItem("user");
   const handleLogin = () => {
     navigate('/auth/signIn');
-  }
+  };
+
+  const [cartOpen, setCartOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11">
@@ -33,38 +34,28 @@ const Header = (props: {
             <span className="relative block h-5.5 w-5.5 cursor-pointer">
               <span className="du-block absolute right-0 h-full w-full">
                 <span
-                  className={`relative top-0 left-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white ${
-                    !props.sidebarOpen && '!w-full delay-300'
-                  }`}
+                  className={`relative top-0 left-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white ${!props.sidebarOpen && '!w-full delay-300'}`}
                 ></span>
                 <span
-                  className={`relative top-0 left-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white ${
-                    !props.sidebarOpen && 'delay-400 !w-full'
-                  }`}
+                  className={`relative top-0 left-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white ${!props.sidebarOpen && 'delay-400 !w-full'}`}
                 ></span>
                 <span
-                  className={`relative top-0 left-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white ${
-                    !props.sidebarOpen && '!w-full delay-500'
-                  }`}
+                  className={`relative top-0 left-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white ${!props.sidebarOpen && '!w-full delay-500'}`}
                 ></span>
               </span>
               <span className="absolute right-0 h-full w-full rotate-45">
                 <span
-                  className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white ${
-                    !props.sidebarOpen && '!h-0 !delay-[0]'
-                  }`}
+                  className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white ${!props.sidebarOpen && '!h-0 !delay-[0]'}`}
                 ></span>
                 <span
-                  className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white ${
-                    !props.sidebarOpen && '!h-0 !delay-200'
-                  }`}
+                  className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white ${!props.sidebarOpen && '!h-0 !delay-200'}`}
                 ></span>
               </span>
             </span>
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
 
-          <Link className="block flex-shrink-0" to="/">
+          <Link className="block flex-shrink-0 ml-2 w-25 " to="/">
             <img src={Logo} alt="Logo" />
           </Link>
         </div>
@@ -95,10 +86,9 @@ const Header = (props: {
                   />
                 </svg>
               </button>
-
               <input
                 type="text"
-                placeholder="Type to search..."
+                placeholder="Busca algo en DeliGo..."
                 className="w-full bg-transparent pr-4 pl-9 focus:outline-none"
               />
             </div>
@@ -107,29 +97,34 @@ const Header = (props: {
 
         <div className="flex items-center gap-3 2xsm:gap-7">
           <ul className="flex items-center gap-2 2xsm:gap-4">
-            {/* <!-- Dark Mode Toggler --> */}
             <DarkModeSwitcher /> 
-
-            
-            {/* <!-- Dark Mode Toggler --> */}
-
-            {/* <!-- Notification Menu Area --> */}
             <DropdownNotification />
-            {/* <!-- Notification Menu Area --> */}
-            <Navbar/>
-            {/* <!-- Chat Notification Area --> */}
-            <DropdownMessage />
-            {/* <!-- Chat Notification Area --> */}
             {!storedUser && (
-              <button onClick={handleLogin}>
-                SignUp
-              </button>
+              <button onClick={handleLogin}>SignUp</button>
             )}
           </ul>
 
-          {/* <!-- User Area --> */}
           <DropdownUser />
-          {/* <!-- User Area --> */}
+
+          {/* <!-- Cart Button --> */}
+<button
+  onClick={() => setCartOpen(true)}
+  className="relative inline-flex items-center justify-center p-2 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white"
+>
+  🛒
+</button>
+
+{/* Fondo oscuro cuando el carrito está abierto */}
+{cartOpen && (
+  <div
+    className="fixed inset-0 bg-black bg-opacity-40 z-40"
+    onClick={() => setCartOpen(false)}
+  />
+)}
+
+{/* Sidebar del carrito encima del overlay */}
+<CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+
         </div>
       </div>
     </header>

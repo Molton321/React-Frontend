@@ -1,33 +1,27 @@
-import CardFour from '../../components/CardFour.tsx';
-import CardOne from '../../components/CardOne.tsx';
-import CardThree from '../../components/CardThree.tsx';
-import CardTwo from '../../components/CardTwo.tsx';
-import ChartOne from '../../components/ChartOne.tsx';
-import ChartThree from '../../components/ChartThree.tsx';
-import ChartTwo from '../../components/ChartTwo.tsx';
-import ChatCard from '../../components/ChatCard.tsx';
-//import MapOne from '../../components/MapOne.tsx';
-import TableOne from '../../components/TableOne.tsx';
+import ProductSlider from "../../components/Slides/ProductCard";
+import RestaurantSlider from "../../components/Slides/RestaurantCard";
 
 const ECommerce = () => {
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardOne />
-        <CardTwo />
-        <CardThree />
-        <CardFour />
-      </div>
+      
+      <div className="px-4 mb-6">
+  <h2 className="text-xl sm:text-2xl font-bold text-[#353343] dark:text-white mb-1">
+     Descubre las mejores ofertas cerca de ti
+  </h2>
 
-      <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        <ChartOne />
-        <ChartTwo />
-        <ChartThree />
-        <div className="col-span-12 xl:col-span-8">
-          <TableOne />
-        </div>
-        <ChatCard />
-      </div>
+</div>
+
+        <ProductSlider/>
+      
+<div className="px-4 mt-12">
+  <h2 className="text-xl sm:text-2xl font-bold text-[#353343] dark:text-white mb-1">
+     Los 10 favoritos de la semana
+  </h2>
+    
+</div>
+    <RestaurantSlider/>
+      
     </>
   );
 };

@@ -20,6 +20,7 @@
     "formik": "^2.4.6",
     "headlessui": "^0.0.0",
     "jsvectormap": "^1.5.3",
+    "keen-slider": "^6.8.6",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.511.0",
     "match-sorter": "^6.3.1",
