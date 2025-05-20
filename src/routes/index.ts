@@ -25,12 +25,6 @@ const Demo = lazy(() => import('../pages/Demo'))
 const MapPage = lazy(() => import('../pages/DeliveryMap/MapPage'))
 
 
-// Users
-const ListUsers = lazy(() => import('../pages/user/list'));
-// const CreatetUser = lazy(() => import('../pages/user/create'));
-// const UpdatetUser = lazy(() => import('../pages/user/update'));
-const ViewUser = lazy(() => import('../pages/user/view'));
-
 // Address
 const ListAddress = lazy(() => import('../pages/address/list'));
 const CreateAddress = lazy(() => import('../pages/address/create'));
@@ -145,45 +139,6 @@ const routes = [
     component: Demo,
   },
   {
-    path: '/users/profile',
-    title: 'Profile',
-    component: UserProfile 
-  },
-  {
-    path: '/users/list',
-    title: 'List',
-    component: ListUsers 
-  },
-  {
-    path: '/roles/list',
-    title: 'List',
-    component: ListRoles 
-  },
-  {
-    path: '/permisions/list',
-    title: 'List',
-    component: ListPermisions 
-  },
-  // {
-  //   path: '/users/create',
-  //   title: 'Create User',
-  //   component: CreatetUser,
-  // },
-  // {
-  //   path: '/users/update/:id',
-  //   title: 'Update User',
-  //   component: UpdatetUser,
-  // },
-  {
-  //   path: '/users/create',
-  //   title: 'Create',
-  // },
-  // {
-  //   path: '/users/update/:id',
-  //   title: 'Update',
-  //   component: UpdateUserPage
-  // },
-  // {
     path: '/roles/create',
     title: 'Create',
     component: CreateRole
@@ -208,9 +163,6 @@ const routes = [
     title: 'Map',
     component: MapPage
   },
-  //   path: '/users/view/:id',
-  //   title: 'View User',
-  // },
 
   // Address
   {
@@ -452,24 +404,7 @@ const routes = [
     path: '/shift/view/:id',
     title: 'View Shift',
     component: ViewShift,
-  },
-
-  // // User
-  // {
-  //   path: '/user',
-  //   title: 'User',
-  //   component: ListUser,
-  // },
-  // {
-  //   path: '/user/create',
-  //   title: 'Create User',
-  //   component: CreateUser,
-  // },
-  // {
-  //   path: '/user/update/:id',
-  //   title: 'Update User',
-  //   component: UpdateUser,
-  // },
+  }
 ];
 
 export default routes;

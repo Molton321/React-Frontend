@@ -1,6 +1,6 @@
-import { User } from "../models/User";
+import { User } from "../models/user";
 import { store } from "../stores/store";
-import { setUser } from "../stores/UserSlice";
+import { setUser } from "../stores/userSlice";
 
 class SecurityService extends EventTarget {  //
     keySession: string;

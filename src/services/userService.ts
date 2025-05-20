@@ -1,5 +1,5 @@
 import axios from 'axios';
-import User from '../models/User';
+import User from '../models/user';
 export class UserService {
     private baseUrl = `${import.meta.env.VITE_API_URL}/users`;
 
