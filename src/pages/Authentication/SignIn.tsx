@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import GreenButton from '../../components/GreenButton';
-import { useNavigate } from 'react-router-dom';
 
 const SignIn: React.FC = () => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
