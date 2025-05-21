@@ -139,7 +139,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             'w-full group relative flex items-center rounded-sm py-2 px-4 font-bold text-[#353343] dark:text-white duration-300 ease-in-out hover:bg-bodydark1 dark:hover:bg-meta-4'
                           }
                         >
-                          <span sidebar-toggle-item>Models</span>
+                          <span>Models</span>
                           <svg
                             className="ml-auto w-4 h-4 text-gray-400  dark:group-hover:text-white"
                             fill="none"
