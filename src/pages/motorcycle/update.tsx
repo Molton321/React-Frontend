@@ -6,7 +6,7 @@ import motorcycleService from '../../services/motorcycleService';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const motorcycleFormSchema = Yup.object({
-    licensePlate: Yup.string().required('La placa es obligatoria'),
+    license_plate: Yup.string().required('La placa es obligatoria'),
     brand: Yup.string().required('La marca es obligatoria'),
     year: Yup.number().required('El año es obligatorio'),
     status: Yup.string().required('El estado es obligatorio'),
@@ -44,6 +44,7 @@ const UpdateMotorcyclePage: React.FC = () => {
                 onSubmit={handleSubmit}
                 submitLabel="Update Motorcycle"
                 formTitle={`Update Motorcycle ${id}`}
+                statusOptions={['active', 'manitenance', 'retired']}
             />
         </div>
     );

@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import InputSelector from './InputSelector';
 import { useNavigate } from 'react-router-dom';
 import BackButton from './BackButton';
+import motorcycleService from '../services/motorcycleService';
 
 interface DynamicFormProps {
   model: { [key: string]: any };
@@ -15,6 +16,8 @@ interface DynamicFormProps {
   statusOptions?: string[];
   hideItems?: boolean;
   formTitle?: string; // <-- nueva prop
+  motorcyclesOptions?: string[]; // ✅ Nueva prop
+
 }
 
 const DynamicForm: React.FC<DynamicFormProps> = ({
@@ -27,6 +30,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
   issuesOptions,
   hideItems = true,
   formTitle = '', // <-- default vacío
+  motorcyclesOptions
 }) => {
   return (
     <Formik
@@ -46,7 +50,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
             </h3>
             <BackButton
               route={-1}
-              className="text-gray-500 dark:text-white"
+              className="text-gray-500 dark:text-white "
             ></BackButton>
           </div>
           {Object.keys(model)
@@ -60,9 +64,10 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
                   key === 'product' ||
                   key == 'customer' ||
                   key === 'menu' ||
-                  key === 'address' ||
+                  // key === 'address' ||
                   key === 'driver' ||
-                  key === 'createdAt')
+                  key === 'createdAt'||
+                  key === 'photos')
               )
                 return false;
               return true;
@@ -96,17 +101,21 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
                       ? statusOptions
                       : key === 'issue_type'
                         ? issuesOptions
+                        : key === 'motorcycle_id'
+                        ? motorcyclesOptions
                         : undefined
                   }
                   type={
-                    typeof model[key] === 'boolean'
-                      ? 'checkbox'
-                      : typeof model[key] === 'number'
-                        ? 'number'
-                        : 'text'
+                    key === 'start_time' || key === 'end_time' || key === 'start_time' || key === 'end_time' || key === 'infraction_date'
+                      ? 'datetime-local'
+                      : typeof model[key] === 'boolean'
+                        ? 'checkbox'
+                        : typeof model[key] === 'number'
+                          ? 'number'
+                          : 'text'
                   }
                   className="w-full border rounded-md p-2 bg-white dark:bg-form-input dark:border-form-strokedark dark:text-white"
-                  disabled={!!readOnly} // <-- pass disabled
+                  disabled={!!readOnly}
                 />
                 <ErrorMessage
                   name={key}

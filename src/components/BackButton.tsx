@@ -25,7 +25,7 @@ const BackButton: React.FC<BackButtonProps> = ({
   return (
     <button
       type="button"
-      className={`flex items-center gap-2 w-fit text-gray-700 dark:text-white hover:text-primary dark:hover:text-primary font-medium ${className}`}
+      className={`flex items-center gap-2 w-fit text-gray-700 dark:text-white hover:text-[#27b16e]  font-bold ${className}`}
       onClick={handleClick}
     >
       <svg

@@ -5,13 +5,11 @@ import Product from '../../models/product';
 import productService from '../../services/productService';
 import { useNavigate } from 'react-router-dom';
 
-const productModel: Product = {
-  id: 0,
+const productModel: Omit<Product,'id'|'createdAt'> = {
   name: '',
   description: '',
   price: 0,
   category: '',
-  createdAt: new Date(),
 };
 const productFormSchema = Yup.object({
   name: Yup.string().required('El nombre es obligatorio'),
@@ -23,7 +21,7 @@ const productFormSchema = Yup.object({
 const CreateProductPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = async (values: Product ) => {
+  const handleSubmit = async (values: Omit<Product,'id'|'createdAt'> ) => {
     try {
       await productService.createProduct(values);
       navigate('/product');

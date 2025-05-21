@@ -2,8 +2,8 @@ interface Shift {
     id: number;
     driver_id: number;
     motorcycle_id: number;
-    startTime: Date;
-    endTime?: Date;
+    start_time: Date;
+    end_time?: Date;
     status: 'scheduled' | 'active' | 'completed' | 'cancelled';
     createdAt: Date;
 }

@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 const restaurantModel: Omit<Restaurant, 'id' | 'createdAt'> = {
   name: '',
-  description: '',
   address: '',
   phone: '',
   email: '',
@@ -15,7 +14,6 @@ const restaurantModel: Omit<Restaurant, 'id' | 'createdAt'> = {
 
 const restaurantFormSchema = Yup.object({
   name: Yup.string().required('El nombre es obligatorio'),
-  description: Yup.string().required('La descripción es obligatoria'),
   address: Yup.string().required('La dirección es obligatoria'),
   phone: Yup.string().required('El teléfono es obligatorio'), 
   email: Yup.string().email('Email inválido'),
