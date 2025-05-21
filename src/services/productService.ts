@@ -21,6 +21,8 @@ export class ProductService {
     async getProductById(id: number): Promise<Product | null> {
         try {
             const response = await api.get(`${this.baseUrl}/${id}`);
+            
+            
             return response.data;
         } catch (error) {
             console.error(error);
@@ -30,7 +32,12 @@ export class ProductService {
 
     async createProduct(product: Omit<Product, 'id' | 'createdAt'>): Promise<Product | null> {
         try {
+            
             const response = await api.post(this.baseUrl, product);
+            console.log(product);
+            
+            console.log(response);
+            
             return response.data;
         } catch (error) {
             console.error(error);

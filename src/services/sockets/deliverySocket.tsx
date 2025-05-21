@@ -20,7 +20,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const PLATE = "ABC124";
-const url = import.meta.env.VITE_BACKEND_URL;
+const url = import.meta.env.VITE_API_URL;
 const socket = io(url);
 
 

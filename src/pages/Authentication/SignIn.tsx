@@ -47,7 +47,7 @@ const SignIn: React.FC = () => {
           id="card"
         >
           <form className="space-y-20" action="#">
-            <h5 className="mt-10 text-2xl md:text-4xl font-medium text-gray-900 dark:text-white text-center">
+            <h5 className="mt-10 text-2xl md:text-4xl font-medium text-black dark:text-white text-center">
               Regístrate o Inicia sesión para{' '}
               <span className="emphasis">continuar</span>
             </h5>
