@@ -8,6 +8,7 @@ export class MotorcycleService {
 
     async getMotorcycles(): Promise<Motorcycle[]> {
         try {
+            console.log(this.baseUrl);
             const response = await api.get(this.baseUrl);
             return response.data;
         } catch (error) {

@@ -31,6 +31,7 @@ const InputSelector: React.FC<InputSelectorProps> = ({
         model={model}
         className={className}
         disabled={disabled}
+        
       />
     );
   }

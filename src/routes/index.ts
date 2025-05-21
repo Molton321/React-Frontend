@@ -87,6 +87,10 @@ const CreateShift = lazy(() => import('../pages/shift/create'));
 const UpdateShift = lazy(() => import('../pages/shift/update'));
 const ViewShift = lazy(() => import('../pages/shift/view'));
 
+// MotorcycleInfringemets
+const createMotorcycleInfringement = lazy(() => import('../pages/motorcycleInfringements/create'));
+
+
 
 const routes = [
   {
@@ -400,7 +404,15 @@ const routes = [
     path: '/shift/view/:id',
     title: 'View Shift',
     component: ViewShift,
-  }
+  },
+  //motorcycleInfringemets
+  
+   {
+    path:'/motorcycleInfringement/create',
+    title:'Create Motorcycle Infringement',
+    component: createMotorcycleInfringement,
+  },
+
 ];
 
 export default routes;

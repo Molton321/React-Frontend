@@ -35,6 +35,12 @@ const ReferenceSelect: React.FC<ReferenceSelectProps> = ({
         } else if (typeof service[`getAll${model.charAt(0).toUpperCase() + model.slice(1)}s`] === 'function') {
           data = await service[`getAll${model.charAt(0).toUpperCase() + model.slice(1)}s`]();
         }
+        if (model === 'motorcycle') {
+          data = data.map((item) => ({
+            ...item,
+            license_plate: item.license_plate,
+          }));
+        }
         setOptions(data || []);
       } catch (error) {
         setOptions([]);
@@ -49,7 +55,10 @@ const ReferenceSelect: React.FC<ReferenceSelectProps> = ({
     <Field as="select" name={name} className={className} disabled={disabled || loading}>
       <option value="">Seleccione...</option>
       {options.map((item) => (
-        <option key={item[valueKey]} value={item[valueKey]}>
+        <option
+          key={item[valueKey]}
+          value={model === 'motorcycle' ? item.license_plate : item[valueKey]}
+        >
           {item[labelKey] || item[valueKey]}
         </option>
       ))}

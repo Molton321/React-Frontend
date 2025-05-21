@@ -2,7 +2,6 @@ import React from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import InputSelector from './InputSelector';
-import { useNavigate } from 'react-router-dom';
 import BackButton from './BackButton';
 
 interface DynamicFormProps {
@@ -100,7 +99,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
                         : undefined
                   }
                   type={
-                    key === 'start_time' || key === 'end_time' || key === 'start_time' || key === 'end_time'
+                    key === 'start_time' || key === 'end_time' || key === 'start_time' || key === 'end_time' || key === 'date'
                       ? 'datetime-local'
                       : typeof model[key] === 'boolean'
                         ? 'checkbox'
