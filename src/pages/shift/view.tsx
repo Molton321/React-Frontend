@@ -8,8 +8,8 @@ import { useParams } from 'react-router-dom';
 const shiftFormSchema = Yup.object({
     driver_id: Yup.number().required('El conductor es obligatorio'),
     motorcycle_id: Yup.number().required('La moto es obligatoria'),
-    startTime: Yup.date().required('La hora de inicio es obligatoria'),
-    endTime: Yup.date().notRequired(),
+    start_time: Yup.date().required('La hora de inicio es obligatoria'),
+    end_time: Yup.date().notRequired(),
     status: Yup.string().required('El estado es obligatorio'),
 });
 

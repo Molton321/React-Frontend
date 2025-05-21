@@ -60,7 +60,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
                   key === 'product' ||
                   key == 'customer' ||
                   key === 'menu' ||
-                  key === 'address' ||
+                  // key === 'address' ||
                   key === 'driver' ||
                   key === 'createdAt'||
                   key === 'photos')
@@ -100,14 +100,16 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
                         : undefined
                   }
                   type={
-                    typeof model[key] === 'boolean'
-                      ? 'checkbox'
-                      : typeof model[key] === 'number'
-                        ? 'number'
-                        : 'text'
+                    key === 'start_time' || key === 'end_time' || key === 'start_time' || key === 'end_time'
+                      ? 'datetime-local'
+                      : typeof model[key] === 'boolean'
+                        ? 'checkbox'
+                        : typeof model[key] === 'number'
+                          ? 'number'
+                          : 'text'
                   }
                   className="w-full border rounded-md p-2 bg-white dark:bg-form-input dark:border-form-strokedark dark:text-white"
-                  disabled={!!readOnly} // <-- pass disabled
+                  disabled={!!readOnly}
                 />
                 <ErrorMessage
                   name={key}

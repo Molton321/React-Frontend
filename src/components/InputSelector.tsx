@@ -68,8 +68,32 @@ const InputSelector: React.FC<InputSelectorProps> = ({
       );
     }
   }
+
+  // Utilidad para formatear correctamente el valor para datetime-local
+  const formatDateTimeLocal = (value: any) => {
+    if (!value) return '';
+    if (value instanceof Date) {
+      const pad = (n: number) => n.toString().padStart(2, '0');
+      return `${value.getFullYear()}-${pad(value.getMonth() + 1)}-${pad(value.getDate())}T${pad(value.getHours())}:${pad(value.getMinutes())}`;
+    }
+    if (typeof value === 'string') {
+      if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(value)) return value;
+      if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(value)) return value.slice(0, 16);
+      if (/^\d{4}-\d{2}-\d{2}$/.test(value)) return value + 'T00:00';
+      const d = new Date(value);
+      if (!isNaN(d.getTime())) return formatDateTimeLocal(d);
+    }
+    return '';
+  };
+
   return (
-    <Field type={type} name={name} className={className} disabled={disabled} />
+    <Field
+      type={type}
+      name={name}
+      className={className}
+      disabled={disabled}
+      value={type === 'datetime-local' ? formatDateTimeLocal(value) : value}
+    />
   );
 };
 

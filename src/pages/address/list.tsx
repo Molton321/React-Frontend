@@ -11,7 +11,7 @@ const headers = [
   'city',
   'state',
   'postal_code',
-  'aditional_info',
+  'additional_info',
 ];
 
 const actions = [

@@ -9,16 +9,16 @@ import { useNavigate } from 'react-router-dom';
 const shiftModel: Omit<Shift, 'id' | 'createdAt'> = {
   driver_id: 0,
   motorcycle_id: 0,
-  startTime: new Date(),
-  endTime: undefined,
+  start_time: new Date(),
+  end_time: undefined,
   status: 'scheduled',
 };
 
 const shiftFormSchema = Yup.object({
   driver_id: Yup.number().typeError('Debe ser un número').required('El ID del conductor es obligatorio'),
   motorcycle_id: Yup.number().typeError('Debe ser un número').required('El ID de la moto es obligatorio'),
-  startTime: Yup.date().typeError('Debe ser una fecha').required('La hora de inicio es obligatoria'),
-  endTime: Yup.date().typeError('Debe ser una fecha').notRequired(),
+  start_time: Yup.date().typeError('Debe ser una fecha').required('La hora de inicio es obligatoria'),
+  end_time: Yup.date().typeError('Debe ser una fecha').notRequired(),
   status: Yup.string().required('El estado es obligatorio'),
 });
 
@@ -27,6 +27,7 @@ const CreateShiftPage: React.FC = () => {
 
   const handleSubmit = async (values: typeof shiftModel) => {
     try {
+      console.log('Creating shift with values:', values);
       await shiftService.createShift(values as Omit<Shift, 'id' | 'createdAt'>);
       navigate('/shift');
     } catch (error) {

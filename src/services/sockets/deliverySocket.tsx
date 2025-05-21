@@ -10,7 +10,12 @@ import { io } from "socket.io-client";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-// 🔧 Icono Leaflet
+// =====================
+// Configuración de iconos de Leaflet
+// =====================
+// Esto asegura que los íconos de los marcadores se muestren correctamente en React
+// y no fallen por rutas relativas.
+
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -19,12 +24,16 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png",
 });
 
-const PLATE = "ABC124";
-const url = import.meta.env.VITE_BACKEND_URL;
-const socket = io(url);
+// =====================
+// Constantes de configuración
+// =====================
+const PLATE = "ABC124"; // Placa de la moto a rastrear
+const url = import.meta.env.VITE_BACKEND_URL; // URL del backend
+const socket = io(url); // Conexión a Socket.IO
 
-
-
+// =====================
+// Componente auxiliar para centrar el mapa
+// =====================
 function ChangeMapView({ center }: { center: [number, number] }) {
   const map = useMap();
   useEffect(() => {
@@ -33,17 +42,26 @@ function ChangeMapView({ center }: { center: [number, number] }) {
   return null;
 }
 
+// =====================
+// Componente principal: SocketMap
+// =====================
+/**
+ * Muestra un mapa en tiempo real con la ubicación de una moto de reparto.
+ * Se conecta al backend por WebSocket y actualiza la posición del marcador.
+ */
 const SocketMap = () => {
+  // Estado para la posición actual del marcador
   const [position, setPosition] = useState<[number, number]>([
     5.071, -75.5144,
   ]);
+  // Estado para saber si el código se ejecuta en el cliente
   const [isClient, setIsClient] = useState(false);
 
-  // 🧠 Lógica de suscripción WebSocket y limpieza al desmontar
+  // Suscripción a WebSocket y limpieza al desmontar
   useEffect(() => {
     setIsClient(typeof window !== "undefined");
 
-    // 🟢 Iniciar tracking
+    // Inicia el tracking en el backend
     fetch(`${url}/motorcycles/track/${PLATE}`, {
       method: "POST",
     })
@@ -51,14 +69,14 @@ const SocketMap = () => {
       .then((data) => console.log("🟢 Tracking iniciado:", data))
       .catch((err) => console.error("❌ Error al iniciar tracking:", err));
 
-    // 📡 Escuchar coordenadas nuevas
+    // Escucha actualizaciones de posición desde el backend
     socket.on("actualizar_mapa", (data: { lat: number; lng: number }) => {
       if (typeof data.lat === "number" && typeof data.lng === "number") {
         setPosition([data.lat, data.lng]);
       }
     });
 
-    // 🧹 Limpieza al desmontar
+    // Limpieza al desmontar: elimina el listener y detiene el tracking
     return () => {
       socket.off("actualizar_mapa");
       fetch(`${url}/motorcycles/stop/${PLATE}`, {
@@ -68,7 +86,7 @@ const SocketMap = () => {
     };
   }, []);
 
-  // 🚪 Al cerrar la pestaña o recargar la página
+  // Maneja el cierre o recarga de la pestaña para detener el tracking
   useEffect(() => {
     const handleBeforeUnload = () => {
       navigator.sendBeacon(
@@ -83,8 +101,10 @@ const SocketMap = () => {
     };
   }, []);
   
+  // Evita renderizar en SSR
   if (!isClient) return null;
 
+  // Renderiza el mapa con la posición actual
   return (
     <MapContainer
       center={position}

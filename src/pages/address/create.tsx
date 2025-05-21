@@ -11,7 +11,7 @@ const addressModel: Omit<Address, 'id' | 'createdAt'> = {
   city: '',
   state: '',
   postal_code: '',
-  aditional_info: '',
+  additional_info: '',
 };
 
 const addressFormSchema = Yup.object({
@@ -20,7 +20,7 @@ const addressFormSchema = Yup.object({
   city: Yup.string().required('La ciudad es obligatoria'),
   state: Yup.string().required('El estado es obligatorio'),
   postal_code: Yup.string().required('El código postal es obligatorio'),
-  aditional_info: Yup.string(),
+  additional_info: Yup.string(),
 });
 
 const CreateAddressPage: React.FC = () => {
@@ -29,7 +29,7 @@ const CreateAddressPage: React.FC = () => {
   const handleSubmit = async (values: typeof addressModel) => {
     try {
       await addressService.createAddress(values);
-      navigate('/address/list');
+      navigate('/address');
     } catch (error) {
       alert('Failed to create address.');
     }
