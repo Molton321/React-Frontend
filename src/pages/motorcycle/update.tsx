@@ -44,6 +44,7 @@ const UpdateMotorcyclePage: React.FC = () => {
                 onSubmit={handleSubmit}
                 submitLabel="Update Motorcycle"
                 formTitle={`Update Motorcycle ${id}`}
+                statusOptions={['active', 'manitenance', 'retired']}
             />
         </div>
     );
