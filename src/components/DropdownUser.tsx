@@ -19,6 +19,20 @@ const DropdownUser = () => {
     navigate('/auth/signIn');
   };
 
+  const getPicture = () => {
+    localStorage.getItem('user');
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      try {
+        const userObj = JSON.parse(userString);
+        return userObj.picture;
+      } catch {
+        return UserOne;
+      }
+    }
+    return UserOne;
+  };
+
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -69,12 +83,12 @@ const profilePhoto =
 
         <span className="h-10 w-10 rounded-full">
           <img
-  src={profilePhoto || 'https://ui-avatars.com/api/?name=User'}
-  alt="User"
-  className="object-cover h-10 w-10 rounded-full"
-  referrerPolicy="no-referrer"
-/>
-
+            src={getPicture()}
+            className="rounded-xl"
+            alt="User"
+            referrerPolicy="no-referrer"
+            onError={(e) => (e.currentTarget.src = UserOne)}
+          />
         </span>
 
         <svg

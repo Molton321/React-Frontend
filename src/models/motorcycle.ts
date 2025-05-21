@@ -1,6 +1,6 @@
 interface Motorcycle {
     id: number;
-    licensePlate: string;
+    license_plate: string;
     brand: string;
     year: number;
     status: 'active' | 'maintenance' | 'retired';

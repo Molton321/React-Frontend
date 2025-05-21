@@ -1,7 +1,4 @@
-import { Component, lazy } from 'react';
-import UserProfile from '../pages/Users/List';
-import ListRoles from '../pages/Roles/ListRoles';
-import ListPermisions from '../pages/Permisions/ListPermisions';
+import {  lazy } from 'react';
 
 
 const CreateRole = lazy(() => import('../pages/Roles/CreateRoles'))
@@ -13,7 +10,6 @@ const UpdatePermision = lazy(() => import('../pages/Permisions/UpdatePermision')
 //CAMBIAR A LAZY
 
 const Calendar = lazy(() => import('../pages/Calendar'));
-const Chart = lazy(() => import('../pages/Chart'));
 const FormElements = lazy(() => import('../pages/Form/FormElements'));
 const FormLayout = lazy(() => import('../pages/Form/FormLayout'));
 const Profile = lazy(() => import('../pages/Profile'));

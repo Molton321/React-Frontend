@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom';
 
 const restaurantFormSchema = Yup.object({
     name: Yup.string().required('El nombre es obligatorio'),
-    description: Yup.string().required('La descripción es obligatoria'),
     address: Yup.string().required('La dirección es obligatoria'),
     phone: Yup.string().required('El teléfono es obligatorio'),
     email: Yup.string().email('Debe ser un email válido'),
@@ -23,6 +22,7 @@ const ViewRestaurantPage: React.FC = () => {
                 setRestaurantModel(data);
             });
         }
+        console.log(restaurantModel);
     }, [id]);
 
     if (!restaurantModel) return <div>Cargando...</div>;

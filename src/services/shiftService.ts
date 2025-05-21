@@ -7,13 +7,13 @@ export class ShiftService {
     async getShifts(filters?: {
         driver_id?: number;
         status?: Shift['status'];
-        startTime?: string | Date;
-        endTime?: string | Date;
+        start_time?: string | Date;
+        end_time?: string | Date;
     }): Promise<Shift[]> {
         try {
             const params: any = { ...filters };
-            if (filters?.startTime && typeof filters.startTime !== 'string') params.startTime = (filters.startTime as Date).toISOString();
-            if (filters?.endTime && typeof filters.endTime !== 'string') params.endTime = (filters.endTime as Date).toISOString();
+            if (filters?.start_time && typeof filters.start_time !== 'string') params.start_time = (filters.start_time as Date).toISOString();
+            if (filters?.end_time && typeof filters.end_time !== 'string') params.end_time = (filters.end_time as Date).toISOString();
             const response = await api.get(this.baseUrl, { params });
             return response.data;
         } catch (error) {

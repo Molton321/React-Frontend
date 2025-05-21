@@ -12,7 +12,7 @@ const addressFormSchema = Yup.object({
     city: Yup.string().required('La ciudad es obligatoria'),
     state: Yup.string().required('El estado es obligatorio'),
     postal_code: Yup.string().required('El código postal es obligatorio'),
-    aditional_info: Yup.string(),
+    additional_info: Yup.string(),
 });
 
 const UpdateAddressPage: React.FC = () => {
